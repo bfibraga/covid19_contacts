@@ -6,25 +6,32 @@ import User.*;
 import Message.*;
 import dataStructures.DoublyLinkedList;
 import dataStructures.Iterator;
+import dataStructures.OrderedSequence;
+import dataStructures.OrderedSequenceClass;
 
 public class ContactNetClass implements ContactNet {
 
-    private DoublyLinkedList<User> users;
+    private OrderedSequence<User> users;
 
     public ContactNetClass(){
-        users = new DoublyLinkedList<User>();
+        users = new OrderedSequenceClass<User>();
     }
 
     @Override
     public void insertUser(String login, String name, int age, String address, String profession) throws UserExists {
         if(userExists(login)) throw new UserExists(); //if 
         User user = new UserClass(login, name, age, address, profession);
-        users.addFirst(user);
+        users.insert(user);
     }
 
     @Override
-    public User showUser(String login) throws UserNotExists {
-        return null;
+    public UserData showUser(String login) throws UserNotExists {
+        User toBeFound = new UserClass(login, null, -1, null, null);
+        UserData found = (UserData)users.get(toBeFound);
+
+        if (found == null) throw new UserNotExists();
+        return found;
+
     }
 
     /**

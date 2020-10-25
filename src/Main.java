@@ -133,7 +133,7 @@ public class Main {
         String login = in.nextLine().trim().toUpperCase();
         in.nextLine();
         try {
-            User user = net.showUser(login);
+            UserData user = net.showUser(login);
             System.out.println(user.getLogin() + " " + user.getName() + " "
                     + user.getAge());
             System.out.println(user.getAddress() + " " + user.getProfession());

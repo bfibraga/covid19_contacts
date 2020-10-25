@@ -3,7 +3,7 @@ package User;
 /**
  * An interface that represents a <code>"Utilizador"</code> of the system.
  */
-public interface User {
+public interface User extends UserData, Comparable<User> {
 
     /**
      * Returns the data of the user. The data includes the login, name, age, address and profession of the current <code>User</code>.

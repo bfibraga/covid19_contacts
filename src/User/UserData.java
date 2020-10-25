@@ -3,7 +3,7 @@ package User;
 /**
  * An interface
  */
-public interface UserData extends User{
+public interface UserData {
 
     /**
      *

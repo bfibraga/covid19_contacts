@@ -2,18 +2,20 @@ package User;
 
 import Group.Group;
 import dataStructures.DoublyLinkedList;
+import dataStructures.OrderedSequence;
+import dataStructures.OrderedSequenceClass;
 
 /**
  * A class that
  */
-public class UserClass implements UserData {
+public class UserClass implements User {
 
     private String login;
     private String name;
     private int age;
     private String address;
     private String profession;
-    private DoublyLinkedList<User> contacts;
+    private OrderedSequence<User> contacts;
     private DoublyLinkedList<Group> groups;
 
     public UserClass(String login, String name, int age, String address, String profession){
@@ -22,7 +24,7 @@ public class UserClass implements UserData {
         this.age = age;
         this.address = address;
         this.profession = profession;
-        contacts = new DoublyLinkedList<User>();
+        contacts = new OrderedSequenceClass<User>();
         groups = new DoublyLinkedList<Group>();
     }
 
@@ -59,5 +61,11 @@ public class UserClass implements UserData {
     @Override
     public boolean hasContactWith(User current) {
         return false;
+    }
+
+
+    @Override
+    public int compareTo(User o) {
+        return getLogin().compareTo(o.getLogin());
     }
 }
