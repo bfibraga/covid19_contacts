@@ -57,7 +57,15 @@ public class ContactNetClass implements ContactNet {
 
     @Override
     public void insertContact(String login1, String login2) throws UserNotExists, ContactExists {
-        
+        User user1 = new UserClass(login1, null, -1, null, null);
+        User user2 = new UserClass(login2, null, -1, null, null);
+        user1 = users.get(user1);
+        user2 = users.get(user2);
+        if(user1 == null || user2 == null) throw new UserNotExists();
+        if(user1.hasContactWith(user2)) throw new ContactExists();
+
+        user1.addContact(user2);
+        user2.addContact(user1);
     }
 
     @Override

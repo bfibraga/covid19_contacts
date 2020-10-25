@@ -54,13 +54,18 @@ public class UserClass implements User {
     }
 
     @Override
+    public void addContact(User toBeInserted) {
+        contacts.insert(toBeInserted);
+    }
+
+    @Override
     public boolean removeContact(User toBeRemoved) {
         return contacts.remove(toBeRemoved);
     }
 
     @Override
     public boolean hasContactWith(User current) {
-        return false;
+        return contacts.contains(current);
     }
 
 

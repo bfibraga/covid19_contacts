@@ -6,17 +6,17 @@ package User;
 public interface User extends UserData, Comparable<User> {
 
     /**
-     * Returns the data of the user. The data includes the login, name, age, address and profession of the current <code>User</code>.
-     *
-     * @return Data of the current <code>User</code>.
+     * Inserts a new user to the contact list of this user
+     * @param toBeInserted the user that is to be inserted in the contact list
+     * @pre toBeInserted != null
      */
-    //UserData getData();
+    void addContact(User toBeInserted);
 
     /**
      * Verify if the contact has been removed or not of the current <code>User</code> by other resgisted <code>User</code>
      *
      * @param toBeRemoved - The contact to be removed
-     * @return
+     * @return true if it has been removed successfully, false if otherwise
      */
     boolean removeContact(User toBeRemoved);
 
