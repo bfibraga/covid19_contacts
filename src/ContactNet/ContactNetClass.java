@@ -54,7 +54,6 @@ public class ContactNetClass implements ContactNet {
         }
         return found;
     }
-
     @Override
     public void insertContact(String login1, String login2) throws UserNotExists, ContactExists {
         User user1 = new UserClass(login1, null, -1, null, null);
@@ -70,7 +69,20 @@ public class ContactNetClass implements ContactNet {
 
     @Override
     public void removeContact(String login1, String login2) throws UserNotExists, ContactNotExists, ContactNotRemoved {
-
+        if (login1.equals(login2))
+            throw new ContactNotRemoved();
+        else {
+            User user1 = showUser(login1);
+            User user2 = showUser(login2);
+            if (user1 == null || user2 == null){
+                throw new UserNotExists();
+            } else if (!user1.hasContactWith(user2) || !user2.hasContactWith(user1)){
+                throw new ContactNotRemoved();
+            } else {
+                user1.removeContact(user2);
+                user2.removeContact(user1);
+            }
+        }
     }
 
     @Override

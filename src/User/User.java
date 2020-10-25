@@ -6,17 +6,10 @@ package User;
 public interface User extends UserData, Comparable<User> {
 
     /**
-     * Inserts a new user to the contact list of this user
-     * @param toBeInserted the user that is to be inserted in the contact list
-     * @pre toBeInserted != null
-     */
-    void addContact(User toBeInserted);
-
-    /**
      * Verify if the contact has been removed or not of the current <code>User</code> by other resgisted <code>User</code>
      *
      * @param toBeRemoved - The contact to be removed
-     * @return true if it has been removed successfully, false if otherwise
+     * @return
      */
     boolean removeContact(User toBeRemoved);
 
@@ -26,4 +19,5 @@ public interface User extends UserData, Comparable<User> {
      */
     boolean hasContactWith(User current);
 
+    void addContact(User new_contact);
 }
