@@ -52,8 +52,9 @@ public class Main {
     public static final String CONTACT_NOT_REMOVED = "Contacto nao pode ser removido.";
     public static final String NO_CONTACTS = "Inexistencia de contactos.";
     public static final String GROUP_EXISTS = "Grupo ja existente.";
-    public static final String GROUP_NOT_EXISTS = "Inexistencia de grupo referido.";
+    public static final String GROUP_NOT_EXISTS = "Inexistencia do grupo referido.";
     public static final String SUBSCRIPTION_EXISTS = "Existencia de aderencia referida.";
+    public static final String SUBSCRIPTION_NOT_EXISTS_RP = "Inexistencia de aderencia referida.";
     public static final String NO_PARTICIPANTS = "Inexistencia de participantes.";
     public static final String SUBSCRIPTION_NOT_EXISTS = "Inexistencia do participante referido.";
     public static final String NO_CONTACT_MESSAGES = "Contacto nao tem mensagens.";
@@ -129,7 +130,7 @@ public class Main {
     }
 
     private static void showUser(Scanner in, ContactNet net) {
-        String login = in.nextLine().toUpperCase();
+        String login = in.nextLine().trim().toUpperCase();
         in.nextLine();
         try {
             User user = net.showUser(login);
@@ -215,7 +216,7 @@ public class Main {
             System.out.println(g.getGroupName());
             System.out.println(g.getDescription());
         } catch (GroupNotExists e) {
-            System.out.println(e.getMessage());
+            System.out.println(GROUP_NOT_EXISTS);
         }
     }
 
@@ -260,7 +261,7 @@ public class Main {
         } catch (GroupNotExists e) {
             System.out.println(GROUP_NOT_EXISTS);
         } catch (SubscriptionNotExists e) {
-            System.out.println(SUBSCRIPTION_EXISTS);
+            System.out.println(SUBSCRIPTION_NOT_EXISTS_RP);
         }
     }
 
