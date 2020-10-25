@@ -68,4 +68,13 @@ public class UserClass implements User {
     public int compareTo(User o) {
         return getLogin().compareTo(o.getLogin());
     }
+
+    @Override
+    public boolean equals(Object other){
+        if (other == null) return false;
+        if (other == this) return true;
+        if (!(other instanceof User)) return false;
+        User otherUser = (User)other;
+        return this.getLogin().equals(otherUser.getLogin());
+    }
 }

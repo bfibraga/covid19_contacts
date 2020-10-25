@@ -25,9 +25,9 @@ public class ContactNetClass implements ContactNet {
     }
 
     @Override
-    public UserData showUser(String login) throws UserNotExists {
+    public User showUser(String login) throws UserNotExists {
         User toBeFound = new UserClass(login, null, -1, null, null);
-        UserData found = (UserData)users.get(toBeFound);
+        User found = users.get(toBeFound);
 
         if (found == null) throw new UserNotExists();
         return found;
@@ -57,7 +57,7 @@ public class ContactNetClass implements ContactNet {
 
     @Override
     public void insertContact(String login1, String login2) throws UserNotExists, ContactExists {
-
+        
     }
 
     @Override

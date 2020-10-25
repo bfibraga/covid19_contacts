@@ -1,6 +1,7 @@
 import ContactNet.*;
 import Exceptions.*;
 import User.*;
+import dataStructures.*;
 
 import java.util.Scanner;
 
@@ -83,7 +84,7 @@ public class Main {
                 listContacts(in, net);
             else if (cmd.equalsIgnoreCase(INSERT_GROUP))
                 insertGroup(in, net);
-            else if (cmd.equalsIgnoreCase(SHOW_GROUP))
+            /*else if (cmd.equalsIgnoreCase(SHOW_GROUP))
                 showGroup(in, net);
             else if (cmd.equalsIgnoreCase(REMOVE_GROUP))
                 removeGroup(in, net);
@@ -98,7 +99,7 @@ public class Main {
             else if (cmd.equalsIgnoreCase(LIST_CONTACT_MESSAGES))
                 listContactMessages(in, net);
             else if (cmd.equalsIgnoreCase(LIST_GROUP_MESSAGES))
-                listGroupMessages(in, net);
+                listGroupMessages(in, net);*/
             else if (cmd.equalsIgnoreCase(EXIT)) {
                 in.nextLine(); in.nextLine();
                 System.out.println(EXIT_MESSAGE);
@@ -177,8 +178,7 @@ public class Main {
         String login = in.nextLine().trim().toUpperCase();
         in.nextLine();
         try {
-            //TODO - completar proxima linha
-            //Iterator<*** A VOSSA INTERFACE AQUI ***> it = net.listContacts(login);
+            Iterator<User> it = net.listContacts(login);
             printUsers(it);
         } catch (UserNotExists e) {
             System.out.println(USER_NOT_EXISTS);
@@ -188,9 +188,9 @@ public class Main {
     }
 
     //TODO
-    private static void printUsers(Iterator<*** A VOSSA INTERFACE AQUI ***> users) {
+    private static void printUsers(Iterator<User> users) {
         while (users.hasNext()) {
-			*** A VOSSA INTERFACE AQUI *** u = users.next();
+			UserData u = users.next();
             System.out.printf("%s %s\n", u.getLogin(), u.getName());
         }
     }
@@ -207,7 +207,7 @@ public class Main {
         }
     }
 
-    private static void showGroup(Scanner in, ContactNet net) {
+   /* private static void showGroup(Scanner in, ContactNet net) {
         String name = in.nextLine().trim().toUpperCase();
         in.nextLine();
         try {
@@ -335,5 +335,7 @@ public class Main {
                 System.out.println();
         }
     }
+
+    */
 
 }

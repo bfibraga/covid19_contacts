@@ -47,7 +47,7 @@ public class OrderedSequenceClass<E extends Comparable<E>> implements OrderedSeq
         E elem;
         while(it.hasNext()){
             elem = it.next();
-            if(elem.equals(element)) return elem;
+            if(element.equals(elem)) return elem;
         }
         return null;
     }

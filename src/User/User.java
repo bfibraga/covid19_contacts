@@ -25,4 +25,5 @@ public interface User extends UserData, Comparable<User> {
      * @return
      */
     boolean hasContactWith(User current);
+
 }
