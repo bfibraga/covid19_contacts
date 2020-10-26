@@ -88,7 +88,7 @@ public class UserClass implements User {
 
     @Override
     public int compareTo(User o) {
-        return getLogin().compareTo(o.getLogin());
+        return this.getLogin().compareTo(o.getLogin());
     }
 
     @Override

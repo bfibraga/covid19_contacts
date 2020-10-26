@@ -15,9 +15,9 @@ public class OrderedSequenceClass<E extends Comparable<E>> implements OrderedSeq
         int pos = 0;
 
         if(!list.isEmpty()){
-            while(it.hasNext() && equalsOrHigher){
+            while(it.hasNext() && !equalsOrHigher){
                 current = it.next();
-                if(element.compareTo(current)>=0)
+                if(current.compareTo(element)>=0)
                     equalsOrHigher = true;
                 else pos++;
             }
@@ -32,24 +32,14 @@ public class OrderedSequenceClass<E extends Comparable<E>> implements OrderedSeq
 
     @Override
     public boolean contains(E element) {
-        Iterator<E> it = iterator();
-
-        while(it.hasNext()){
-            E elem = it.next();
-            if(elem.equals(element)) return true;
-        }
-        return false;
+        E result = binarySearch(0, list.size()-1, element);
+        return result != null;
     }
 
     @Override
     public E get(E element) {
-        Iterator<E> it = iterator();
-        E elem;
-        while(it.hasNext()){
-            elem = it.next();
-            if(element.equals(elem)) return elem;
-        }
-        return null;
+        E result = binarySearch(0, list.size()-1, element);
+        return result;
     }
 
     @Override
@@ -62,4 +52,12 @@ public class OrderedSequenceClass<E extends Comparable<E>> implements OrderedSeq
         return list.isEmpty();
     }
 
+    private E binarySearch(int first, int last, E elem){
+        if(last < first) return null;
+        int mid = first + (last-first)/2;
+        E element = list.get(mid);
+        if (element.equals(elem)) return element;
+        if (element.compareTo(elem) > 0) return binarySearch(first, mid-1, elem);
+        return binarySearch(mid+1, last, elem);
+    }
 }
