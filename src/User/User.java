@@ -1,5 +1,7 @@
 package User;
 
+import dataStructures.Iterator;
+
 /**
  * An interface that represents a <code>"Utilizador"</code> of the system.
  */
@@ -20,4 +22,8 @@ public interface User extends UserData, Comparable<User> {
     boolean hasContactWith(User current);
 
     void addContact(User new_contact);
+
+    boolean hasContacts();
+
+    Iterator<User> contactIterator();
 }

@@ -57,4 +57,9 @@ public class OrderedSequenceClass<E extends Comparable<E>> implements OrderedSeq
         return list.iterator();
     }
 
+    @Override
+    public boolean isEmpty(){
+        return list.isEmpty();
+    }
+
 }

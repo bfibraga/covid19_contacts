@@ -61,7 +61,7 @@ public class ContactNetClass implements ContactNet {
         user1 = users.get(user1);
         user2 = users.get(user2);
         if(user1 == null || user2 == null) throw new UserNotExists();
-        if(user1.hasContactWith(user2)) throw new ContactExists();
+        if(user1.hasContactWith(user2) || user1.equals(user2)) throw new ContactExists();
 
         user1.addContact(user2);
         user2.addContact(user1);
@@ -87,7 +87,12 @@ public class ContactNetClass implements ContactNet {
 
     @Override
     public Iterator<User> listContacts(String login) throws UserNotExists, NoContacts {
-        return null;
+        User user = users.get(new UserClass(login, null, -1, null, null));
+        if(user == null) throw new UserNotExists();
+        if(!user.hasContacts()) throw new NoContacts();
+
+        return user.contactIterator();
+
     }
 
     @Override

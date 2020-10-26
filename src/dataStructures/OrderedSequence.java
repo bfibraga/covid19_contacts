@@ -10,4 +10,6 @@ public interface OrderedSequence<E extends Comparable<E>> {
     E get(E element);
 
     Iterator<E> iterator();
+
+    boolean isEmpty();
 }

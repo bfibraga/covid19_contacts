@@ -2,6 +2,7 @@ package User;
 
 import Group.Group;
 import dataStructures.DoublyLinkedList;
+import dataStructures.Iterator;
 import dataStructures.OrderedSequence;
 import dataStructures.OrderedSequenceClass;
 
@@ -25,7 +26,6 @@ public class UserClass implements User {
         this.address = address;
         this.profession = profession;
         contacts = new OrderedSequenceClass<User>();
-        contacts.insert(this); //TODO ???? ERRO ENUNCIADO?
         groups = new DoublyLinkedList<Group>();
     }
 
@@ -57,6 +57,16 @@ public class UserClass implements User {
     @Override
     public void addContact(User toBeInserted) {
         contacts.insert(toBeInserted);
+    }
+
+    @Override
+    public boolean hasContacts() {
+        return !contacts.isEmpty();
+    }
+
+    @Override
+    public Iterator<User> contactIterator() {
+        return contacts.iterator();
     }
 
     @Override
