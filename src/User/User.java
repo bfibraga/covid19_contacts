@@ -26,4 +26,6 @@ public interface User extends UserData, Comparable<User> {
     boolean hasContacts();
 
     Iterator<User> contactIterator();
+
+    boolean canJoinGroup();
 }

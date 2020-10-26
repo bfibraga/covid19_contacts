@@ -18,6 +18,7 @@ public class UserClass implements User {
     private String profession;
     private OrderedSequence<User> contacts;
     private DoublyLinkedList<Group> groups;
+    private int n_groups;
 
     public UserClass(String login, String name, int age, String address, String profession) {
         this.login = login;
@@ -27,6 +28,7 @@ public class UserClass implements User {
         this.profession = profession;
         contacts = new OrderedSequenceClass<User>();
         groups = new DoublyLinkedList<Group>();
+        n_groups = 0;
     }
 
     @Override
@@ -67,6 +69,11 @@ public class UserClass implements User {
     @Override
     public Iterator<User> contactIterator() {
         return contacts.iterator();
+    }
+
+    @Override
+    public boolean canJoinGroup() {
+        return n_groups != groups.size();
     }
 
     @Override

@@ -1,7 +1,7 @@
 package ContactNet;
 
 import Exceptions.*;
-import Group.Group;
+import Group.*;
 import User.*;
 import Message.*;
 import dataStructures.DoublyLinkedList;
@@ -12,9 +12,11 @@ import dataStructures.OrderedSequenceClass;
 public class ContactNetClass implements ContactNet {
 
     private OrderedSequence<User> users;
+    private DoublyLinkedList<Group> groups;
 
     public ContactNetClass(){
         users = new OrderedSequenceClass<User>();
+        groups = new DoublyLinkedList<Group>();
     }
 
     @Override
@@ -97,7 +99,12 @@ public class ContactNetClass implements ContactNet {
 
     @Override
     public void insertGroup(String group, String description) throws GroupExists {
-
+        Iterator<Group> it = groups.iterator();
+        while (it.hasNext()){
+            if (it.next().getName().equals(group))
+                throw new GroupExists();
+        }
+        groups.addFirst(new GroupClass(group, description));
     }
 
     @Override
