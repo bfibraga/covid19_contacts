@@ -47,4 +47,11 @@ public interface OrderedSequence<E extends Comparable<E>> {
      * @return true if the list has no elements in it, false if it has at least one element.
      */
     boolean isEmpty();
+
+    /**
+     * Returns current size of the ordered sequence
+     * @return Number of elements present in the sequence
+     */
+    int getCurrentSize();
+
 }

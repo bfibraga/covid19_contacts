@@ -53,11 +53,21 @@ public class GroupClass implements Group{
     }
 
     @Override
+    public void removeAllParticipants() {
+
+        Iterator<User> subscribers = participants.iterator();
+        while(subscribers.hasNext()){
+            User user = subscribers.next();
+            user.removeSubscription(this);
+        }
+    }
+
+    @Override
     public boolean equals(Object obj) {
         if (obj == null)
             return false;
         if (obj == this)
-            return false;
+            return true;
         if (!(obj instanceof Group))
             return false;
         Group otherGroup = (Group) obj;

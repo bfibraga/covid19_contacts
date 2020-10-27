@@ -87,10 +87,10 @@ public class Main {
                 insertGroup(in, net);
             else if (cmd.equalsIgnoreCase(SHOW_GROUP))
                 showGroup(in, net);
-           /* else if (cmd.equalsIgnoreCase(REMOVE_GROUP))
+            else if (cmd.equalsIgnoreCase(REMOVE_GROUP))
                 removeGroup(in, net);
-            else if (cmd.equalsIgnoreCase(INSERT_GROUP_PARTICIPANT))
-                subscribeGroup(in, net);*/
+         //   else if (cmd.equalsIgnoreCase(INSERT_GROUP_PARTICIPANT))
+          //      subscribeGroup(in, net);
             else if (cmd.equalsIgnoreCase(REMOVE_GROUP_PARTICIPANT))
                 removeSubscription(in, net);
             else if (cmd.equalsIgnoreCase(LIST_GROUP_PARTICIPANTS))
@@ -221,7 +221,7 @@ public class Main {
         }
     }
 
-   /* private static void removeGroup(Scanner in, ContactNet net) {
+    private static void removeGroup(Scanner in, ContactNet net) {
         String name = in.nextLine().trim().toUpperCase();
         in.nextLine();
         try {
@@ -248,7 +248,7 @@ public class Main {
         } catch (SubscriptionExists e) {
             System.out.println(SUBSCRIPTION_EXISTS);
         }
-    }*/
+    }
 
     private static void removeSubscription(Scanner in, ContactNet net) {
         String login = in.next().toUpperCase();

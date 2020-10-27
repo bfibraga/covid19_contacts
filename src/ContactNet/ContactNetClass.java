@@ -117,6 +117,7 @@ public class ContactNetClass implements ContactNet {
     public void removeGroup(String group) throws GroupNotExists {
         Group toBeRemoved = searchGroup(group);
         if(toBeRemoved == null) throw new GroupNotExists();
+        toBeRemoved.removeAllParticipants();
         groups.remove(toBeRemoved);
     }
 

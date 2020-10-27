@@ -12,4 +12,6 @@ public interface Group extends GroupData{
     boolean hasSubscription(User user);
 
     void removeSubscription(User user);
+
+    void removeAllParticipants();
 }

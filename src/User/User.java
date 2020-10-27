@@ -1,5 +1,7 @@
 package User;
 
+import Group.Group;
+import Group.GroupClass;
 import dataStructures.Iterator;
 
 /**
@@ -28,4 +30,6 @@ public interface User extends UserData, Comparable<User> {
     Iterator<User> contactIterator();
 
     boolean canJoinGroup();
+
+    void removeSubscription(Group group);
 }

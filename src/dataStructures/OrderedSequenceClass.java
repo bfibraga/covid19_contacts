@@ -14,14 +14,14 @@ public class OrderedSequenceClass<E extends Comparable<E>> implements OrderedSeq
         boolean equalsOrHigher = false;
         int pos = 0;
 
-        if(!list.isEmpty()){
-            while(it.hasNext() && !equalsOrHigher){
-                current = it.next();
-                if(current.compareTo(element)>=0)
-                    equalsOrHigher = true;
-                else pos++;
-            }
+
+        while(it.hasNext() && !equalsOrHigher){
+            current = it.next();
+            if(current.compareTo(element)>=0)
+                equalsOrHigher = true;
+            else pos++;
         }
+
         list.add(pos, element);
     }
 
@@ -55,6 +55,11 @@ public class OrderedSequenceClass<E extends Comparable<E>> implements OrderedSeq
     @Override
     public boolean isEmpty(){
         return list.isEmpty();
+    }
+
+    @Override
+    public int getCurrentSize() {
+        return list.size();
     }
 
     /**
