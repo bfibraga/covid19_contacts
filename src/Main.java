@@ -89,15 +89,15 @@ public class Main {
                 showGroup(in, net);
             else if (cmd.equalsIgnoreCase(REMOVE_GROUP))
                 removeGroup(in, net);
-         //   else if (cmd.equalsIgnoreCase(INSERT_GROUP_PARTICIPANT))
-          //      subscribeGroup(in, net);
+            else if (cmd.equalsIgnoreCase(INSERT_GROUP_PARTICIPANT))
+                subscribeGroup(in, net);
             else if (cmd.equalsIgnoreCase(REMOVE_GROUP_PARTICIPANT))
                 removeSubscription(in, net);
             else if (cmd.equalsIgnoreCase(LIST_GROUP_PARTICIPANTS))
                 listParticipants(in, net);
-            /*else if (cmd.equalsIgnoreCase(INSERT_MESSAGE))
+            else if (cmd.equalsIgnoreCase(INSERT_MESSAGE))
                 insertMessage(in, net);
-            else if (cmd.equalsIgnoreCase(LIST_CONTACT_MESSAGES))
+            /*else if (cmd.equalsIgnoreCase(LIST_CONTACT_MESSAGES))
                 listContactMessages(in, net);
             else if (cmd.equalsIgnoreCase(LIST_GROUP_MESSAGES))
                 listGroupMessages(in, net);*/
@@ -279,7 +279,7 @@ public class Main {
         }
     }
 
-    /*private static void insertMessage(Scanner in, ContactNet net) {
+    private static void insertMessage(Scanner in, ContactNet net) {
         String login = in.nextLine().trim().toUpperCase();
         String title = in.nextLine().trim().toUpperCase();
         String text = in.nextLine().trim().toUpperCase();
@@ -293,7 +293,7 @@ public class Main {
         }
     }
 
-    private static void listContactMessages(Scanner in, ContactNet net) {
+    /*private static void listContactMessages(Scanner in, ContactNet net) {
         String login1 = in.next().toUpperCase();
         String login2 = in.nextLine().trim().toUpperCase();
         in.nextLine();

@@ -1,0 +1,38 @@
+consistente na escolha de nome
+
+interface de afetação de classes
+ex: It<*UserData*> iteration
+
+x = l.find(new User(a, null,null)) |	iterador
+u = l.get(x) 			   |
+
+------------------------------------------------
+
+UserData: 
+      age: int 
+      login: String //  <= 20 char 
+      name: String //  <= 20 char
+      location: String //  <= 20 char
+      profissao: String //  <= 20 char
+      contacts<User>: DoubleLinkList (?)
+      group_collection<Group>: DoubleLinkList (?)
+
+User: message_colection<Message>
+
+Message: header: String 
+	 text: String
+	 URL: String //  <= 200 char
+
+Group: name: String  //  <= 20 char
+       participants<User>
+
+
+Estrutura de Dados:
+	- inserção
+	- obter info
+	- remoção
+	- listagem
+
+User  - inserção	| Contact - inserção    | 
+      - obter info      |         - remoçao     | 
+	

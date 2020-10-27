@@ -1,7 +1,8 @@
 package Group;
 
-import User.User;
-import dataStructures.Iterator;
+import Message.*;
+import User.*;
+import dataStructures.*;
 
 public interface Group extends GroupData{
 
@@ -11,7 +12,12 @@ public interface Group extends GroupData{
 
     boolean hasSubscription(User user);
 
+    void addSubscription(User user);
+
     void removeSubscription(User user);
 
     void removeAllParticipants();
+
+    void addGroupMessage(Message message);
+
 }

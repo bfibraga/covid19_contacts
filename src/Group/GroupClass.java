@@ -48,6 +48,11 @@ public class GroupClass implements Group{
     }
 
     @Override
+    public void addSubscription(User user) {
+        participants.insert(user);
+    }
+
+    @Override
     public void removeSubscription(User user) {
         participants.remove(user);
     }
@@ -60,6 +65,11 @@ public class GroupClass implements Group{
             User user = subscribers.next();
             user.removeSubscription(this);
         }
+    }
+
+    @Override
+    public void addGroupMessage(Message message) {
+        messages.addLast(message);
     }
 
     @Override

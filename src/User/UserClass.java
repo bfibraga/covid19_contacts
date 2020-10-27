@@ -1,6 +1,7 @@
 package User;
 
 import Group.Group;
+import Message.Message;
 import dataStructures.DoublyLinkedList;
 import dataStructures.Iterator;
 import dataStructures.OrderedSequence;
@@ -16,6 +17,7 @@ public class UserClass implements User {
     private int age;
     private String address;
     private String profession;
+    private DoublyLinkedList<Message> messages;
     private OrderedSequence<User> contacts;
     private DoublyLinkedList<Group> groups;
 
@@ -25,6 +27,7 @@ public class UserClass implements User {
         this.age = age;
         this.address = address;
         this.profession = profession;
+        messages = new DoublyLinkedList<Message>();
         contacts = new OrderedSequenceClass<User>();
         groups = new DoublyLinkedList<Group>();
     }
@@ -77,6 +80,11 @@ public class UserClass implements User {
     @Override
     public void removeSubscription(Group group) {
         groups.remove(group);
+    }
+
+    @Override
+    public void addUserMessage(Message message) {
+        messages.addLast(message);
     }
 
     @Override

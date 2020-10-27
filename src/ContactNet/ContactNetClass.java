@@ -136,7 +136,16 @@ public class ContactNetClass implements ContactNet {
 
     @Override
     public void subscribeGroup(String login, String group) throws UserNotExists, GroupNotExists, SubscriptionExists {
+        Group selected_group = searchGroup(group);
+        User selected_user = showUser(login);
 
+        if (selected_group == null)
+            throw new GroupNotExists();
+
+        //TODO Improve time c. O(n^2)
+        if (selected_group.hasSubscription(selected_user))
+            throw new SubscriptionExists();
+        selected_group.addSubscription(selected_user);
     }
 
     @Override
@@ -161,7 +170,11 @@ public class ContactNetClass implements ContactNet {
 
     @Override
     public void insertMessage(String login, String title, String text, String url) throws UserNotExists {
-
+        User selected_user = showUser(login);
+        if (selected_user == null)
+            throw new UserNotExists();
+        Message new_message = new MessageClass(title,text,url);
+        selected_user.addUserMessage(new_message);
     }
 
     @Override

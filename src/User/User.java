@@ -1,8 +1,8 @@
 package User;
 
-import Group.Group;
-import Group.GroupClass;
-import dataStructures.Iterator;
+import Group.*;
+import Message.*;
+import dataStructures.*;
 
 /**
  * An interface that represents a <code>"Utilizador"</code> of the system.
@@ -32,4 +32,6 @@ public interface User extends UserData, Comparable<User> {
     boolean canJoinGroup();
 
     void removeSubscription(Group group);
+
+    void addUserMessage(Message message);
 }
