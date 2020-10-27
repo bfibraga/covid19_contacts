@@ -90,8 +90,8 @@ public class Main {
                 showGroup(in, net);
             else if (cmd.equalsIgnoreCase(REMOVE_GROUP))
                 removeGroup(in, net);
-         //   else if (cmd.equalsIgnoreCase(INSERT_GROUP_PARTICIPANT))
-          //      subscribeGroup(in, net);
+               else if (cmd.equalsIgnoreCase(INSERT_GROUP_PARTICIPANT))
+                subscribeGroup(in, net);
             else if (cmd.equalsIgnoreCase(REMOVE_GROUP_PARTICIPANT))
                 removeSubscription(in, net);
             else if (cmd.equalsIgnoreCase(LIST_GROUP_PARTICIPANTS))
@@ -359,7 +359,14 @@ public class Main {
         }
     }
 
-    
+    /**
+     * Inserts a message, made by an user with given login, with the following title, text and its corresponding URL and
+     * it's sent to all users who are a contact with the user and to the groups where the user belongs to. It fails when
+     * the user that tries to send the message doesn't exist.
+     * @param in Scanner where we will be reading inputs from
+     * @param net Contact network where the message is gonna be sent
+     * @pre in != null && net != null
+     */
     private static void insertMessage(Scanner in, ContactNet net) {
         String login = in.nextLine().trim().toUpperCase();
         String title = in.nextLine().trim().toUpperCase();
@@ -374,6 +381,14 @@ public class Main {
         }
     }
 
+    /**
+     * Lists all the messages made by an user with given login, requested by an user who is a contact with previous user.
+     * The user can request to see its own messages. It only fails when the user requesting access, the user with the messages
+     * doesn't exist or when the list of messages from the user is empty or the users don't have a contact between each other.
+     * @param in Scanner where we will be reading the inputs from
+     * @param net Contact Network where we gather information required to list
+     * @pre in != null && net != null
+     */
     private static void listContactMessages(Scanner in, ContactNet net) {
         String login1 = in.next().toUpperCase();
         String login2 = in.nextLine().trim().toUpperCase();
@@ -390,6 +405,14 @@ public class Main {
         }
     }
 
+    /**
+     * Lists all the messages made by all users who belong to a group with given name when requested by an user with given login and
+     * belongs to the same group. It will fail when the user requesting access doesn't exist, when the group in question
+     * isn't registered in the network.
+     * @param in Scanner where we will be reading the inputs from
+     * @param net Contact network where we gather information required to list
+     * @pre in != null && net != null
+     */
     private static void listGroupMessages(Scanner in, ContactNet net) {
         String name = in.next().toUpperCase();
         String login1 = in.nextLine().trim().toUpperCase();
@@ -408,6 +431,11 @@ public class Main {
         }
     }
 
+    /**
+     * Prints the messages within the format of "Title, Description, URL" into the console
+     * @param messages Iterator that iterates through a collection of messages
+     * @pre messages != null
+     */
     private static void printMessages(Iterator<Message> messages) {
         while (messages.hasNext()) {
             Message m = messages.next();
