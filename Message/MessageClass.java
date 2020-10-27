@@ -1,0 +1,32 @@
+package Message;
+
+import User.*;
+
+public class MessageClass implements Message{
+
+    private String title;
+    private String description;
+    private String url;
+    private User author;
+
+    public MessageClass(String title, String description, String url, User author){
+        this.title = title;
+        this.description = description;
+        this.url = url;
+        this.author = author;
+    }
+    @Override
+    public String getTitle() {
+        return title;
+    }
+
+    @Override
+    public String getDescription() {
+        return description;
+    }
+
+    @Override
+    public String getURL() {
+        return url;
+    }
+}
