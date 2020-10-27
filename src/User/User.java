@@ -1,13 +1,14 @@
 package User;
 
-import Group.*;
-import Message.*;
-import dataStructures.*;
+import Group.Group;
+import Group.GroupClass;
+import Message.Message;
+import dataStructures.Iterator;
 
 /**
  * An interface that represents a <code>"Utilizador"</code> of the system.
  */
-public interface User extends UserData, Comparable<User> {
+public interface User extends UserData, Comparable<User>{
 
     /**
      * Verify if the contact has been removed or not of the current <code>User</code> by other resgisted <code>User</code>
@@ -33,5 +34,11 @@ public interface User extends UserData, Comparable<User> {
 
     void removeSubscription(Group group);
 
-    void addUserMessage(Message message);
+    void createMessage(Message msg);
+
+    void insertMessage(Message msg);
+
+    Iterator<Message> messageIterator();
+
+    void subscribe(Group group);
 }

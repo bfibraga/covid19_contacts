@@ -1,5 +1,7 @@
 package Message;
 
+import User.*;
+
 public class MessageClass implements Message{
 
     private String title;

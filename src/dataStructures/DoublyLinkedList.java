@@ -90,9 +90,8 @@ public class DoublyLinkedList<E> implements List<E>  {
 	public int find(E element) {
 		int pos=0;
 		DListNode<E> auxNo = head;
-		boolean found=false;
 		if (head.getElement().equals(element)) return 0;
-		for(int i = 1; i < size() && !found; i++){
+		for(int i = 1; i < size(); i++){
             auxNo = auxNo.getNext();
             if(auxNo.getElement().equals(element)) return i;
         }
@@ -158,7 +157,7 @@ public class DoublyLinkedList<E> implements List<E>  {
 
 		previous.setNext(toInsert);
 		auxNode.setPrevious(toInsert);
-
+		currentSize++;
 	}
 	
 	@Override
@@ -184,7 +183,10 @@ public class DoublyLinkedList<E> implements List<E>  {
 		if (size() == 1) {
 		    head = null;
 		    tail = null;
-        }else head = head.getNext();
+        }else{
+			head = head.getNext();
+			head.setPrevious(null);
+		}
 		currentSize--;
     }
 
@@ -209,7 +211,10 @@ public class DoublyLinkedList<E> implements List<E>  {
         if (size() == 1) {
             head = null;
             tail = null;
-        }else tail = tail.getPrevious();
+        }else {
+        	tail = tail.getPrevious();
+        	tail.setNext(null);
+        }
         currentSize--;
     }
 
@@ -261,7 +266,7 @@ public class DoublyLinkedList<E> implements List<E>  {
 	@Override
 	public boolean remove(E element)
 	{
-		//TODO: implementar metodos auxiliares
+
 		DListNode<E> node = this.findNode(element);
 		if ( node == null )
 			return false;
@@ -280,7 +285,7 @@ public class DoublyLinkedList<E> implements List<E>  {
     private DListNode<E> findNode(E element) {
         DListNode<E> auxNode = head;
         int pos = 0;
-        while (pos < size()){
+        while (auxNode != null){
             if(auxNode.getElement().equals(element)) return auxNode;
             auxNode = auxNode.getNext();
             pos++;

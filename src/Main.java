@@ -1,6 +1,7 @@
 import ContactNet.*;
 import Exceptions.*;
 import Group.*;
+import Message.Message;
 import User.*;
 import dataStructures.*;
 
@@ -89,7 +90,7 @@ public class Main {
                 showGroup(in, net);
             else if (cmd.equalsIgnoreCase(REMOVE_GROUP))
                 removeGroup(in, net);
-            else if (cmd.equalsIgnoreCase(INSERT_GROUP_PARTICIPANT))
+               else if (cmd.equalsIgnoreCase(INSERT_GROUP_PARTICIPANT))
                 subscribeGroup(in, net);
             else if (cmd.equalsIgnoreCase(REMOVE_GROUP_PARTICIPANT))
                 removeSubscription(in, net);
@@ -97,10 +98,10 @@ public class Main {
                 listParticipants(in, net);
             else if (cmd.equalsIgnoreCase(INSERT_MESSAGE))
                 insertMessage(in, net);
-            /*else if (cmd.equalsIgnoreCase(LIST_CONTACT_MESSAGES))
+            else if (cmd.equalsIgnoreCase(LIST_CONTACT_MESSAGES))
                 listContactMessages(in, net);
             else if (cmd.equalsIgnoreCase(LIST_GROUP_MESSAGES))
-                listGroupMessages(in, net);*/
+                listGroupMessages(in, net);
             else if (cmd.equalsIgnoreCase(EXIT)) {
                 in.nextLine(); in.nextLine();
                 System.out.println(EXIT_MESSAGE);
@@ -115,7 +116,14 @@ public class Main {
 
     }
 
-
+    /**
+     *
+     * Inserts an user with a provided login, name, age, address and profession into the contact network. It will fail
+     * if the network already contains an user with same login as the one provided
+     * @param in Scanner from where we're reading the inputs
+     * @param net Contact network where it will be inserted the new user
+     * @pre in != null && net != null
+     */
     private static void insertUser(Scanner in, ContactNet net) {
         String login = in.next().toUpperCase();
         String name = in.nextLine().trim().toUpperCase();
@@ -131,6 +139,13 @@ public class Main {
         }
     }
 
+    /**
+     * Displays an user with given login its info, mainly its login, name, age, address and their profession. It will fail
+     * if the contact network does not contain an user with given login.
+     * @param in Scanner from where we're reading the inputs
+     * @param net Contact network where we will find the registered user with given login
+     * @pre in != null && net != null
+     */
     private static void showUser(Scanner in, ContactNet net) {
         String login = in.nextLine().trim().toUpperCase();
         in.nextLine();
@@ -144,6 +159,14 @@ public class Main {
         }
     }
 
+    /**
+     * Creates a contact between two users registered in the contact network, identified by their respective logins,
+     * and both of them can receive messages the other writes. It will fail if one of the users aren't registered in the
+     * network or they are already contacts between each other.
+     * @param in Scanner where we will read inputs from
+     * @param net Contact network where the two users are registered
+     * @pre in != null && net != null
+     */
     private static void insertContact(Scanner in, ContactNet net) {
         String login1 = in.next().toUpperCase();
         String login2 = in.next().toUpperCase();
@@ -159,6 +182,14 @@ public class Main {
         }
     }
 
+    /**
+     * Removes a contact between two users, identified by their respective logins, and they will not be able to receive
+     * messages from each other when one writes. It will fail when one of the users isn't registered in the network or
+     * they already dont have a contact between them.
+     * @param in Scanner where we will be reading inputs from
+     * @param net Contact network where the two users are registered
+     * @pre in != null && net != null
+     */
     private static void removeContact(Scanner in, ContactNet net) {
         String login1 = in.next().toUpperCase();
         String login2 = in.next().toUpperCase();
@@ -175,6 +206,13 @@ public class Main {
         }
     }
 
+    /**
+     * Lists all contacts that an user with given login has in that time. It will fail if the user isn't registered in
+     * the network or the user doesn't have any contacts to begin with.
+     * @param in Scanner where we will be reading inputs from
+     * @param net Contact network where the user is registered
+     * @pre in != null && net != null
+     */
     private static void listContacts(Scanner in, ContactNet net) {
         String login = in.nextLine().trim().toUpperCase();
         in.nextLine();
@@ -189,6 +227,11 @@ public class Main {
     }
 
 
+    /**
+     * Lists all the users present within the given iterator, mainly their login and name
+     * @param users Iterator that iterates throughout a collection of Users
+     * @pre users != null
+     */
     private static void printUsers(Iterator<User> users) {
         while (users.hasNext()) {
 			UserData u = users.next();
@@ -196,6 +239,14 @@ public class Main {
         }
     }
 
+    /**
+     * Creates an group within the network where users can join to write to each other in group, rather than in contacts.
+     * It requires a name and description for the group. It fails if the network already has a group with same name as
+     * the one provided
+     * @param in Scanner where we will be reading inputs from
+     * @param net Contact network where will be inserting the group
+     * @pre in != null && net != null
+     */
     private static void insertGroup(Scanner in, ContactNet net) {
         String name = in.nextLine().trim().toUpperCase();
         String text = in.nextLine().trim().toUpperCase();
@@ -208,11 +259,17 @@ public class Main {
         }
     }
 
+    /**
+     * Displays a group with given name their name (lol?) and the description that it was given to the group. It fails if
+     * the network does not contain a group with the same name as the one given.
+     * @param in Scanner where we will be reading inputs from
+     * @param net Contact Network where we will get the group from
+     * @pre in != null && net != null
+     */
     private static void showGroup(Scanner in, ContactNet net) {
         String name = in.nextLine().trim().toUpperCase();
         in.nextLine();
         try {
-            //TODO - completar proxima linha
             GroupData g = net.showGroup(name);
             System.out.println(g.getName());
             System.out.println(g.getDescription());
@@ -221,6 +278,13 @@ public class Main {
         }
     }
 
+    /**
+     * Removes a group with given name from the contact network, making all its participants leave the group automatically.
+     * It fails if the network does not have a group with the same name as the one given.
+     * @param in Scanner where we will be reading inputs from
+     * @param net Contact network where we will remove the group
+     * @pre in != null && net != null
+     */
     private static void removeGroup(Scanner in, ContactNet net) {
         String name = in.nextLine().trim().toUpperCase();
         in.nextLine();
@@ -232,6 +296,7 @@ public class Main {
         }
 
     }
+
 
     private static void subscribeGroup(Scanner in, ContactNet net) {
         String login = in.next().toUpperCase();
@@ -250,6 +315,14 @@ public class Main {
         }
     }
 
+    /**
+     * Removes an user with given login from a group with given name, making them unable to receive messages from the
+     * group unless they join the group again. It fails if the network doesn't have an user with the same login or a
+     * group with the same name as the one provided.
+     * @param in Scanner where we will be reading inputs from
+     * @param net Contact Network where we will execute the actions described above
+     * @pre in != null && net != null
+     */
     private static void removeSubscription(Scanner in, ContactNet net) {
         String login = in.next().toUpperCase();
         String name = in.nextLine().trim().toUpperCase();
@@ -266,6 +339,13 @@ public class Main {
         }
     }
 
+    /**
+     * Lists all the users that joined a group with given name, mainly their login and name. It fails if the group doesn't
+     * exist in the network or the group doesn't have any users in it.
+     * @param in Scanner where we will be reading inputs from
+     * @param net Contact Network where we will execute the actions described above.
+     * @pre in != null && net != null
+     */
     private static void listParticipants(Scanner in, ContactNet net) {
         String group = in.nextLine().trim().toUpperCase();
         in.nextLine();
@@ -279,6 +359,14 @@ public class Main {
         }
     }
 
+    /**
+     * Inserts a message, made by an user with given login, with the following title, text and its corresponding URL and
+     * it's sent to all users who are a contact with the user and to the groups where the user belongs to. It fails when
+     * the user that tries to send the message doesn't exist.
+     * @param in Scanner where we will be reading inputs from
+     * @param net Contact network where the message is gonna be sent
+     * @pre in != null && net != null
+     */
     private static void insertMessage(Scanner in, ContactNet net) {
         String login = in.nextLine().trim().toUpperCase();
         String title = in.nextLine().trim().toUpperCase();
@@ -293,7 +381,15 @@ public class Main {
         }
     }
 
-    /*private static void listContactMessages(Scanner in, ContactNet net) {
+    /**
+     * Lists all the messages made by an user with given login, requested by an user who is a contact with previous user.
+     * The user can request to see its own messages. It only fails when the user requesting access, the user with the messages
+     * doesn't exist or when the list of messages from the user is empty or the users don't have a contact between each other.
+     * @param in Scanner where we will be reading the inputs from
+     * @param net Contact Network where we gather information required to list
+     * @pre in != null && net != null
+     */
+    private static void listContactMessages(Scanner in, ContactNet net) {
         String login1 = in.next().toUpperCase();
         String login2 = in.nextLine().trim().toUpperCase();
         in.nextLine();
@@ -309,6 +405,14 @@ public class Main {
         }
     }
 
+    /**
+     * Lists all the messages made by all users who belong to a group with given name when requested by an user with given login and
+     * belongs to the same group. It will fail when the user requesting access doesn't exist, when the group in question
+     * isn't registered in the network.
+     * @param in Scanner where we will be reading the inputs from
+     * @param net Contact network where we gather information required to list
+     * @pre in != null && net != null
+     */
     private static void listGroupMessages(Scanner in, ContactNet net) {
         String name = in.next().toUpperCase();
         String login1 = in.nextLine().trim().toUpperCase();
@@ -327,15 +431,20 @@ public class Main {
         }
     }
 
+    /**
+     * Prints the messages within the format of "Title, Description, URL" into the console
+     * @param messages Iterator that iterates through a collection of messages
+     * @pre messages != null
+     */
     private static void printMessages(Iterator<Message> messages) {
         while (messages.hasNext()) {
             Message m = messages.next();
             System.out.printf("%s\n%s\n%s\n", m.getTitle(), m.getDescription(), m.getURL());
-            if (messages.hasNext())
-                System.out.println();
+            System.out.println();
         }
+
     }
 
-    */
+
 
 }

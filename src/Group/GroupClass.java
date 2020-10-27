@@ -48,11 +48,6 @@ public class GroupClass implements Group{
     }
 
     @Override
-    public void addSubscription(User user) {
-        participants.insert(user);
-    }
-
-    @Override
     public void removeSubscription(User user) {
         participants.remove(user);
     }
@@ -65,11 +60,12 @@ public class GroupClass implements Group{
             User user = subscribers.next();
             user.removeSubscription(this);
         }
+
     }
 
     @Override
-    public void addGroupMessage(Message message) {
-        messages.addLast(message);
+    public void insertMessage(Message msg) {
+        messages.addFirst(msg);
     }
 
     @Override
@@ -82,6 +78,16 @@ public class GroupClass implements Group{
             return false;
         Group otherGroup = (Group) obj;
         return this.getName().equals(otherGroup.getName());
+    }
+
+    @Override
+    public void addSubscription(User user) {
+        participants.insert(user);
+    }
+
+    @Override
+    public Iterator<Message> listMessages() {
+        return messages.iterator();
     }
 
 

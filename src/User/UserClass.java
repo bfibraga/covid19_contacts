@@ -1,7 +1,7 @@
 package User;
 
-import Group.Group;
-import Message.Message;
+import Group.*;
+import Message.*;
 import dataStructures.DoublyLinkedList;
 import dataStructures.Iterator;
 import dataStructures.OrderedSequence;
@@ -17,9 +17,9 @@ public class UserClass implements User {
     private int age;
     private String address;
     private String profession;
-    private DoublyLinkedList<Message> messages;
     private OrderedSequence<User> contacts;
     private DoublyLinkedList<Group> groups;
+    private DoublyLinkedList<Message> messages;
 
     public UserClass(String login, String name, int age, String address, String profession) {
         this.login = login;
@@ -27,9 +27,9 @@ public class UserClass implements User {
         this.age = age;
         this.address = address;
         this.profession = profession;
-        messages = new DoublyLinkedList<Message>();
         contacts = new OrderedSequenceClass<User>();
         groups = new DoublyLinkedList<Group>();
+        messages = new DoublyLinkedList<Message>();
     }
 
     @Override
@@ -74,7 +74,12 @@ public class UserClass implements User {
 
     @Override
     public boolean canJoinGroup() {
-        return groups.size() < 10;
+        return groups.size() != 10;
+    }
+
+    @Override
+    public void subscribe(Group group){
+        if(canJoinGroup()) groups.addFirst(group);
     }
 
     @Override
@@ -83,8 +88,19 @@ public class UserClass implements User {
     }
 
     @Override
-    public void addUserMessage(Message message) {
-        messages.addLast(message);
+    public void createMessage(Message msg) {
+        this.insertMessage(msg);
+        Iterator<Group> itGroup = groups.iterator();
+        while(itGroup.hasNext()){
+            Group group = itGroup.next();
+            group.insertMessage(msg);
+        }
+
+        Iterator<User> itContacts = contacts.iterator();
+        while(itContacts.hasNext()){
+            User user = itContacts.next();
+            user.insertMessage(msg);
+        }
     }
 
     @Override
@@ -94,7 +110,17 @@ public class UserClass implements User {
 
     @Override
     public boolean hasContactWith(User current) {
-        return contacts.contains(current);
+        return this.equals(current) || contacts.contains(current);
+    }
+
+    @Override
+    public void insertMessage(Message msg){
+        messages.addFirst(msg);
+    }
+
+    @Override
+    public Iterator<Message> messageIterator(){
+        return messages.iterator();
     }
 
     @Override

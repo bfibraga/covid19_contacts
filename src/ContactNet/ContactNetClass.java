@@ -4,10 +4,7 @@ import Exceptions.*;
 import Group.*;
 import User.*;
 import Message.*;
-import dataStructures.DoublyLinkedList;
-import dataStructures.Iterator;
-import dataStructures.OrderedSequence;
-import dataStructures.OrderedSequenceClass;
+import dataStructures.*;
 
 public class ContactNetClass implements ContactNet {
 
@@ -58,12 +55,9 @@ public class ContactNetClass implements ContactNet {
     }
     @Override
     public void insertContact(String login1, String login2) throws UserNotExists, ContactExists {
-        User user1 = new UserClass(login1, null, -1, null, null);
-        User user2 = new UserClass(login2, null, -1, null, null);
-        user1 = users.get(user1);
-        user2 = users.get(user2);
-        if(user1 == null || user2 == null) throw new UserNotExists();
-        if(user1.hasContactWith(user2) || user1.equals(user2)) throw new ContactExists();
+        User user1 = showUser(login1);
+        User user2 = showUser(login2);
+        if(user1.hasContactWith(user2)) throw new ContactExists();
 
         user1.addContact(user2);
         user2.addContact(user1);
@@ -71,25 +65,23 @@ public class ContactNetClass implements ContactNet {
 
     @Override
     public void removeContact(String login1, String login2) throws UserNotExists, ContactNotExists, ContactNotRemoved {
-        if (login1.equals(login2))
-            throw new ContactNotRemoved();
-        else {
+
             User user1 = showUser(login1);
             User user2 = showUser(login2);
-            if (user1 == null || user2 == null){
-                throw new UserNotExists();
-            } else if (!user1.hasContactWith(user2) || !user2.hasContactWith(user1)){
-                throw new ContactNotRemoved();
-            } else {
-                user1.removeContact(user2);
-                user2.removeContact(user1);
-            }
-        }
+            if (user1 == null || user2 == null) throw new UserNotExists();
+            if (user1.equals(user2)) throw new ContactNotRemoved();
+            if (!user1.hasContactWith(user2)) throw new ContactNotExists();
+
+            user1.removeContact(user2);
+            user2.removeContact(user1);
+
     }
+
+
 
     @Override
     public Iterator<User> listContacts(String login) throws UserNotExists, NoContacts {
-        User user = users.get(new UserClass(login, null, -1, null, null));
+        User user = showUser(login);
         if(user == null) throw new UserNotExists();
         if(!user.hasContacts()) throw new NoContacts();
 
@@ -115,8 +107,7 @@ public class ContactNetClass implements ContactNet {
 
     @Override
     public void removeGroup(String group) throws GroupNotExists {
-        Group toBeRemoved = searchGroup(group);
-        if(toBeRemoved == null) throw new GroupNotExists();
+        Group toBeRemoved = showGroup(group);
         toBeRemoved.removeAllParticipants();
         groups.remove(toBeRemoved);
     }
@@ -124,66 +115,70 @@ public class ContactNetClass implements ContactNet {
     private Group searchGroup(String group){
         Iterator<Group> it = groups.iterator();
         Group template = new GroupClass(group, null);
-        boolean found = false;
-        Group g = null;
+        Group result;
         while(it.hasNext()){
-            g = it.next();
-            if (g.equals(template)) return g;
+            result = it.next();
+            if(result.equals(template)) return result;
         }
 
         return null;
+
     }
 
     @Override
     public void subscribeGroup(String login, String group) throws UserNotExists, GroupNotExists, SubscriptionExists {
-        Group selected_group = searchGroup(group);
         User selected_user = showUser(login);
-
-        if (selected_group == null)
-            throw new GroupNotExists();
+        Group selected_group = showGroup(group);
 
         //TODO Improve time c. O(n^2)
         if (selected_group.hasSubscription(selected_user))
             throw new SubscriptionExists();
         selected_group.addSubscription(selected_user);
+        selected_user.subscribe(selected_group);
     }
 
     @Override
     public void removeSubscription(String login, String group) throws UserNotExists, GroupNotExists, SubscriptionNotExists {
-        User user = users.get(new UserClass(login, null, -1, null, null));
-        if(user == null) throw new UserNotExists();
-        Group groupToSubscribe = searchGroup(group);
-        if(groupToSubscribe == null) throw new GroupNotExists();
+        User user = showUser(login);
+        Group groupToSubscribe = showGroup(group);
         if(!groupToSubscribe.hasSubscription(user)) throw new SubscriptionNotExists();
 
         groupToSubscribe.removeSubscription(user);
+        user.removeSubscription(groupToSubscribe);
 
     }
 
     @Override
     public Iterator<User> listParticipants(String group) throws GroupNotExists, NoParticipants {
-        Group result = searchGroup(group);
-        if (result == null) throw new GroupNotExists();
+        Group result = showGroup(group);
         if(!result.hasParticipants()) throw new NoParticipants();
         return result.participantsIterator();
     }
 
     @Override
     public void insertMessage(String login, String title, String text, String url) throws UserNotExists {
-        User selected_user = showUser(login);
-        if (selected_user == null)
-            throw new UserNotExists();
-        Message new_message = new MessageClass(title,text,url);
-        selected_user.addUserMessage(new_message);
+        User author = showUser(login);
+        Message msg = new MessageClass(title, text, url);
+        author.createMessage(msg);
     }
 
     @Override
     public Iterator<Message> listContactMessages(String login1, String login2) throws UserNotExists, ContactNotExists, NoContactMessages {
-        return null;
+        User user1 = showUser(login1);
+        User user2 = showUser(login2);
+        if(!user1.hasContactWith(user2)) throw new ContactNotExists();
+        Iterator<Message> it = user1.messageIterator();
+        if(!it.hasNext()) throw new NoContactMessages();
+        return it;
     }
 
     @Override
     public Iterator<Message> listGroupMessages(String group, String login) throws GroupNotExists, UserNotExists, SubscriptionNotExists, NoGroupMessages {
-        return null;
+        Group g = showGroup(group);
+        User user = showUser(login);
+        if(!g.hasSubscription(user)) throw new SubscriptionNotExists();
+        Iterator<Message> it = g.listMessages();
+        if(!it.hasNext()) throw new NoGroupMessages();
+        return it;
     }
 }
