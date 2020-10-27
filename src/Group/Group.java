@@ -1,8 +1,15 @@
 package Group;
 
-public interface Group {
+import User.User;
+import dataStructures.Iterator;
 
-    String getName();
+public interface Group extends GroupData{
 
-    String getDescription();
+    boolean hasParticipants();
+
+    Iterator<User> participantsIterator();
+
+    boolean hasSubscription(User user);
+
+    void removeSubscription(User user);
 }

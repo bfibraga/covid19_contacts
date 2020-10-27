@@ -33,6 +33,26 @@ public class GroupClass implements Group{
     }
 
     @Override
+    public boolean hasParticipants() {
+        return !participants.isEmpty();
+    }
+
+    @Override
+    public Iterator<User> participantsIterator() {
+        return participants.iterator();
+    }
+
+    @Override
+    public boolean hasSubscription(User user) {
+        return participants.contains(user);
+    }
+
+    @Override
+    public void removeSubscription(User user) {
+        participants.remove(user);
+    }
+
+    @Override
     public boolean equals(Object obj) {
         if (obj == null)
             return false;

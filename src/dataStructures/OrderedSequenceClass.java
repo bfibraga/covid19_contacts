@@ -32,14 +32,19 @@ public class OrderedSequenceClass<E extends Comparable<E>> implements OrderedSeq
 
     @Override
     public boolean contains(E element) {
-        E result = binarySearch(0, list.size()-1, element);
+        E result = get(element);
         return result != null;
     }
 
     @Override
     public E get(E element) {
-        E result = binarySearch(0, list.size()-1, element);
-        return result;
+        Iterator<E> it = iterator();
+        E result;
+        while(it.hasNext()){
+            result = it.next();
+            if(result.equals(element)) return result;
+        }
+        return null;
     }
 
     @Override
@@ -52,6 +57,14 @@ public class OrderedSequenceClass<E extends Comparable<E>> implements OrderedSeq
         return list.isEmpty();
     }
 
+    /**
+     * Binary search to find for the element. Takes O(n) * amount of times the "get" method of List is called, which is
+     * also O(n) so it's not the best way to find for the element
+     * @param first first element of the list
+     * @param last last element of the list
+     * @param elem elem that we're looking for
+     * @return the element that is equal to the elem we're using for looking or null if it didn't find it in the list
+     */
     private E binarySearch(int first, int last, E elem){
         if(last < first) return null;
         int mid = first + (last-first)/2;

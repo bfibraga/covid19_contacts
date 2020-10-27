@@ -1,5 +1,6 @@
 import ContactNet.*;
 import Exceptions.*;
+import Group.*;
 import User.*;
 import dataStructures.*;
 
@@ -84,17 +85,17 @@ public class Main {
                 listContacts(in, net);
             else if (cmd.equalsIgnoreCase(INSERT_GROUP))
                 insertGroup(in, net);
-            /*else if (cmd.equalsIgnoreCase(SHOW_GROUP))
+            else if (cmd.equalsIgnoreCase(SHOW_GROUP))
                 showGroup(in, net);
-            else if (cmd.equalsIgnoreCase(REMOVE_GROUP))
+           /* else if (cmd.equalsIgnoreCase(REMOVE_GROUP))
                 removeGroup(in, net);
             else if (cmd.equalsIgnoreCase(INSERT_GROUP_PARTICIPANT))
-                subscribeGroup(in, net);
+                subscribeGroup(in, net);*/
             else if (cmd.equalsIgnoreCase(REMOVE_GROUP_PARTICIPANT))
                 removeSubscription(in, net);
             else if (cmd.equalsIgnoreCase(LIST_GROUP_PARTICIPANTS))
                 listParticipants(in, net);
-            else if (cmd.equalsIgnoreCase(INSERT_MESSAGE))
+            /*else if (cmd.equalsIgnoreCase(INSERT_MESSAGE))
                 insertMessage(in, net);
             else if (cmd.equalsIgnoreCase(LIST_CONTACT_MESSAGES))
                 listContactMessages(in, net);
@@ -187,7 +188,7 @@ public class Main {
         }
     }
 
-    //TODO
+
     private static void printUsers(Iterator<User> users) {
         while (users.hasNext()) {
 			UserData u = users.next();
@@ -207,20 +208,20 @@ public class Main {
         }
     }
 
-   /* private static void showGroup(Scanner in, ContactNet net) {
+    private static void showGroup(Scanner in, ContactNet net) {
         String name = in.nextLine().trim().toUpperCase();
         in.nextLine();
         try {
             //TODO - completar proxima linha
-            //*** A VOSSA INTERFACE AQUI *** g = net.showGroup(name);
-            System.out.println(g.getGroupName());
+            GroupData g = net.showGroup(name);
+            System.out.println(g.getName());
             System.out.println(g.getDescription());
         } catch (GroupNotExists e) {
             System.out.println(GROUP_NOT_EXISTS);
         }
     }
 
-    private static void removeGroup(Scanner in, ContactNet net) {
+   /* private static void removeGroup(Scanner in, ContactNet net) {
         String name = in.nextLine().trim().toUpperCase();
         in.nextLine();
         try {
@@ -247,7 +248,7 @@ public class Main {
         } catch (SubscriptionExists e) {
             System.out.println(SUBSCRIPTION_EXISTS);
         }
-    }
+    }*/
 
     private static void removeSubscription(Scanner in, ContactNet net) {
         String login = in.next().toUpperCase();
@@ -269,8 +270,7 @@ public class Main {
         String group = in.nextLine().trim().toUpperCase();
         in.nextLine();
         try {
-            //TODO - completar proxima linha
-            //Iterator<*** A VOSSA INTERFACE AQUI***> it = net.listParticipants(group);
+            Iterator<User> it = net.listParticipants(group);
             printUsers(it);
         } catch (GroupNotExists e) {
             System.out.println(GROUP_NOT_EXISTS);
@@ -279,7 +279,7 @@ public class Main {
         }
     }
 
-    private static void insertMessage(Scanner in, ContactNet net) {
+    /*private static void insertMessage(Scanner in, ContactNet net) {
         String login = in.nextLine().trim().toUpperCase();
         String title = in.nextLine().trim().toUpperCase();
         String text = in.nextLine().trim().toUpperCase();

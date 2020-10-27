@@ -99,22 +99,38 @@ public class ContactNetClass implements ContactNet {
 
     @Override
     public void insertGroup(String group, String description) throws GroupExists {
-        Iterator<Group> it = groups.iterator();
-        while (it.hasNext()){
-            if (it.next().getName().equals(group))
-                throw new GroupExists();
-        }
+        Group result = searchGroup(group);
+        if(result != null) throw new GroupExists();
         groups.addFirst(new GroupClass(group, description));
     }
 
     @Override
     public Group showGroup(String group) throws GroupNotExists {
-        return null;
+
+        Group result = searchGroup(group);
+        if(result == null) throw new GroupNotExists();
+        return result;
+
     }
 
     @Override
     public void removeGroup(String group) throws GroupNotExists {
+        Group toBeRemoved = searchGroup(group);
+        if(toBeRemoved == null) throw new GroupNotExists();
+        groups.remove(toBeRemoved);
+    }
 
+    private Group searchGroup(String group){
+        Iterator<Group> it = groups.iterator();
+        Group template = new GroupClass(group, null);
+        boolean found = false;
+        Group g = null;
+        while(it.hasNext()){
+            g = it.next();
+            if (g.equals(template)) return g;
+        }
+
+        return null;
     }
 
     @Override
@@ -124,12 +140,22 @@ public class ContactNetClass implements ContactNet {
 
     @Override
     public void removeSubscription(String login, String group) throws UserNotExists, GroupNotExists, SubscriptionNotExists {
+        User user = users.get(new UserClass(login, null, -1, null, null));
+        if(user == null) throw new UserNotExists();
+        Group groupToSubscribe = searchGroup(group);
+        if(groupToSubscribe == null) throw new GroupNotExists();
+        if(!groupToSubscribe.hasSubscription(user)) throw new SubscriptionNotExists();
+
+        groupToSubscribe.removeSubscription(user);
 
     }
 
     @Override
     public Iterator<User> listParticipants(String group) throws GroupNotExists, NoParticipants {
-        return null;
+        Group result = searchGroup(group);
+        if (result == null) throw new GroupNotExists();
+        if(!result.hasParticipants()) throw new NoParticipants();
+        return result.participantsIterator();
     }
 
     @Override
