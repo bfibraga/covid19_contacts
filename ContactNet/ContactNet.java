@@ -21,8 +21,8 @@ public interface ContactNet {
     void removeContact(String login1, String login2)
             throws UserNotExists, ContactNotExists, ContactNotRemoved;
 
-    //TODO
-    Iterator<User> listContacts(String login)
+
+    Iterator<UserData> listContacts(String login)
             throws UserNotExists, NoContacts;
 
     void insertGroup(String group, String description) throws GroupExists;
@@ -37,8 +37,8 @@ public interface ContactNet {
     void removeSubscription(String login, String group)
             throws UserNotExists, GroupNotExists, SubscriptionNotExists;
 
-    //TODO
-    Iterator<User> listParticipants(String group)
+
+    Iterator<UserData> listParticipants(String group)
             throws GroupNotExists, NoParticipants;
 
     void insertMessage(String login, String title, String text, String url)

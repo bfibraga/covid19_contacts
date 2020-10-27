@@ -88,7 +88,7 @@ public class ContactNetClass implements ContactNet {
     }
 
     @Override
-    public Iterator<User> listContacts(String login) throws UserNotExists, NoContacts {
+    public Iterator<UserData> listContacts(String login) throws UserNotExists, NoContacts {
         User user = users.get(new UserClass(login, null, -1, null, null));
         if(user == null) throw new UserNotExists();
         if(!user.hasContacts()) throw new NoContacts();
@@ -152,7 +152,7 @@ public class ContactNetClass implements ContactNet {
     }
 
     @Override
-    public Iterator<User> listParticipants(String group) throws GroupNotExists, NoParticipants {
+    public Iterator<UserData> listParticipants(String group) throws GroupNotExists, NoParticipants {
         Group result = searchGroup(group);
         if (result == null) throw new GroupNotExists();
         if(!result.hasParticipants()) throw new NoParticipants();

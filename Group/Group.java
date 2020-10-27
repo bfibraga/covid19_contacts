@@ -1,14 +1,14 @@
 package Group;
 
 import Message.Message;
-import User.User;
+import User.*;
 import dataStructures.Iterator;
 
 public interface Group extends GroupData{
 
     boolean hasParticipants();
 
-    Iterator<User> participantsIterator();
+    Iterator<UserData> participantsIterator();
 
     boolean hasSubscription(User user);
 

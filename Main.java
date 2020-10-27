@@ -217,7 +217,7 @@ public class Main {
         String login = in.nextLine().trim().toUpperCase();
         in.nextLine();
         try {
-            Iterator<User> it = net.listContacts(login);
+            Iterator<UserData> it = net.listContacts(login);
             printUsers(it);
         } catch (UserNotExists e) {
             System.out.println(USER_NOT_EXISTS);
@@ -232,7 +232,7 @@ public class Main {
      * @param users Iterator that iterates throughout a collection of Users
      * @pre users != null
      */
-    private static void printUsers(Iterator<User> users) {
+    private static void printUsers(Iterator<UserData> users) {
         while (users.hasNext()) {
 			UserData u = users.next();
             System.out.printf("%s %s\n", u.getLogin(), u.getName());
@@ -350,7 +350,7 @@ public class Main {
         String group = in.nextLine().trim().toUpperCase();
         in.nextLine();
         try {
-            Iterator<User> it = net.listParticipants(group);
+            Iterator<UserData> it = net.listParticipants(group);
             printUsers(it);
         } catch (GroupNotExists e) {
             System.out.println(GROUP_NOT_EXISTS);

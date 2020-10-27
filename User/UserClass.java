@@ -68,8 +68,9 @@ public class UserClass implements User {
     }
 
     @Override
-    public Iterator<User> contactIterator() {
-        return contacts.iterator();
+    public Iterator<UserData> contactIterator() {
+        DoublyLinkedList<UserData> list = (DoublyLinkedList<UserData>)contacts;
+        return list.iterator();
     }
 
     @Override

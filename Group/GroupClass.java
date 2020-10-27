@@ -38,8 +38,9 @@ public class GroupClass implements Group{
     }
 
     @Override
-    public Iterator<User> participantsIterator() {
-        return participants.iterator();
+    public Iterator<UserData> participantsIterator() {
+        DoublyLinkedList<UserData> list = (DoublyLinkedList<UserData>)participants;
+        return list.iterator();
     }
 
     @Override
