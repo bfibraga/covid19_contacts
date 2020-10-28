@@ -2,10 +2,26 @@ package network.Message;
 
 public class MessageClass implements Message{
 
+    /**
+     * Title of the message
+     */
     private String title;
+    /**
+     * Description of the message
+     */
     private String description;
+    /**
+     * URL of the message
+     */
     private String url;
 
+    /**
+     * Creates a message with a given title, description and url
+     * @param title Title of the message
+     * @param description Description of the message
+     * @param url URL of the message
+     * @pre title != null && description != null && url != null
+     */
     public MessageClass(String title, String description, String url){
         this.title = title;
         this.description = description;
