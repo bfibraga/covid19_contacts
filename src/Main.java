@@ -1,9 +1,9 @@
-import ContactNet.*;
-import Exceptions.*;
-import Group.*;
-import Message.Message;
-import User.*;
-import dataStructures.*;
+import network.ContactNet.*;
+import network.Exceptions.*;
+import network.Group.*;
+import network.Message.Message;
+import network.User.*;
+import network.dataStructures.*;
 
 import java.util.Scanner;
 
