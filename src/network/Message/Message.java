@@ -1,5 +1,9 @@
 package network.Message;
 
+/**
+ * An interface that represents a <code>Message</code> in this system.
+ * @author 57747_57833
+ */
 public interface Message {
 
     /**

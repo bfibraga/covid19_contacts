@@ -7,6 +7,10 @@ import network.User.*;
 import network.dataStructures.Iterator;
 //Completar package e imports
 
+/**
+ * An top interface that contains all the available commands in <code>Main</code>
+ * @author 57747_57833
+ */
 public interface ContactNet {
 
 

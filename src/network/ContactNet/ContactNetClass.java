@@ -6,6 +6,10 @@ import network.User.*;
 import network.Message.*;
 import network.dataStructures.*;
 
+/**
+ * An class that implements the methods from <code>ContactNet</code> interface.
+ * @author 57747_57833
+ */
 public class ContactNetClass implements ContactNet {
 
     /**
@@ -18,6 +22,7 @@ public class ContactNetClass implements ContactNet {
      * which will cause the array to resize multiple times, making response time very long.
      */
     private OrderedSequence<User> users;
+
     /**
      * Collection of groups that is saved in the contact network.
      * It was chosen to use a "DoublyLinkedList" data structure as they will be a lot of inserts of groups (and possible
@@ -27,14 +32,17 @@ public class ContactNetClass implements ContactNet {
      */
     private DoublyLinkedList<Group> groups;
 
-    public ContactNetClass(){
+    /**
+     * <bold>Constructor:</bold> Initialize <code>users</code> as a <code>Ordered Sequence</code> of <code>User</code> and groups as <code>Doubly Linked List</code> of <code>Group</code>
+     */
+    public ContactNetClass() {
         users = new OrderedSequenceClass<User>();
         groups = new DoublyLinkedList<Group>();
     }
 
     @Override
     public void insertUser(String login, String name, int age, String address, String profession) throws UserExists {
-        if(userExists(login)) throw new UserExists();
+        if (userExists(login)) throw new UserExists();
         User user = new UserClass(login, name, age, address, profession);
         users.insert(user);
     }
@@ -51,6 +59,7 @@ public class ContactNetClass implements ContactNet {
 
     /**
      * Searchs throughout the list of users for an user that has the same login as the one given
+     *
      * @param login Login of the user to be found
      * @return true if an user with the same login exists, false if otherwise
      * @pre login != null
@@ -61,19 +70,21 @@ public class ContactNetClass implements ContactNet {
         // the same login and other paramenters are irrelevant as our equals() will only care about its login
 
         Iterator<User> it = users.iterator();
-        while(it.hasNext() && !found) { // We go throughout the list until we either find the user with the same login or
-                                        // we run out of elements on the list
+        while (it.hasNext() && !found) { // We go throughout the list until we either find the user with the same login or
+            // we run out of elements on the list
             User user = it.next();
-            if(user.equals(toBeFound)) found = true; // if the user has the same login as the one given, we found our user
-                                                    // and we can leave the cycle
+            if (user.equals(toBeFound))
+                found = true; // if the user has the same login as the one given, we found our user
+            // and we can leave the cycle
         }
         return found;
     }
+
     @Override
     public void insertContact(String login1, String login2) throws UserNotExists, ContactExists {
         User user1 = showUser(login1);
         User user2 = showUser(login2);
-        if(user1.hasContactWith(user2)) throw new ContactExists();
+        if (user1.hasContactWith(user2)) throw new ContactExists();
 
         user1.addContact(user2);
         user2.addContact(user1);
@@ -82,24 +93,23 @@ public class ContactNetClass implements ContactNet {
     @Override
     public void removeContact(String login1, String login2) throws UserNotExists, ContactNotExists, ContactNotRemoved {
 
-            User user1 = showUser(login1);
-            User user2 = showUser(login2);
-            if (user1 == null || user2 == null) throw new UserNotExists();
-            if (user1.equals(user2)) throw new ContactNotRemoved();
-            if (!user1.hasContactWith(user2)) throw new ContactNotExists();
+        User user1 = showUser(login1);
+        User user2 = showUser(login2);
+        if (user1 == null || user2 == null) throw new UserNotExists();
+        if (user1.equals(user2)) throw new ContactNotRemoved();
+        if (!user1.hasContactWith(user2)) throw new ContactNotExists();
 
-            user1.removeContact(user2);
-            user2.removeContact(user1);
+        user1.removeContact(user2);
+        user2.removeContact(user1);
 
     }
-
 
 
     @Override
     public Iterator<User> listContacts(String login) throws UserNotExists, NoContacts {
         User user = showUser(login);
-        if(user == null) throw new UserNotExists();
-        if(!user.hasContacts()) throw new NoContacts();
+        if (user == null) throw new UserNotExists();
+        if (!user.hasContacts()) throw new NoContacts();
 
         return user.contactIterator();
 
@@ -108,7 +118,7 @@ public class ContactNetClass implements ContactNet {
     @Override
     public void insertGroup(String group, String description) throws GroupExists {
         Group result = searchGroup(group);
-        if(result != null) throw new GroupExists();
+        if (result != null) throw new GroupExists();
         groups.addFirst(new GroupClass(group, description));
     }
 
@@ -116,7 +126,7 @@ public class ContactNetClass implements ContactNet {
     public Group showGroup(String group) throws GroupNotExists {
 
         Group result = searchGroup(group);
-        if(result == null) throw new GroupNotExists();
+        if (result == null) throw new GroupNotExists();
         return result;
 
     }
@@ -130,17 +140,18 @@ public class ContactNetClass implements ContactNet {
 
     /**
      * Searches around the collection of groups in search of a group with a given name.
+     *
      * @param group Name of the group that we're searching for
      * @return A group that is present in the collection and has the same name as the one provided.
      * @pre group != null
      */
-    private Group searchGroup(String group){
+    private Group searchGroup(String group) {
         Iterator<Group> it = groups.iterator();
         Group template = new GroupClass(group, null);
         Group result;
-        while(it.hasNext()){
+        while (it.hasNext()) {
             result = it.next();
-            if(result.equals(template)) return result;
+            if (result.equals(template)) return result;
         }
 
         return null;
@@ -163,7 +174,7 @@ public class ContactNetClass implements ContactNet {
     public void removeSubscription(String login, String group) throws UserNotExists, GroupNotExists, SubscriptionNotExists {
         User user = showUser(login);
         Group groupToSubscribe = showGroup(group);
-        if(!groupToSubscribe.hasSubscription(user)) throw new SubscriptionNotExists();
+        if (!groupToSubscribe.hasSubscription(user)) throw new SubscriptionNotExists();
 
         groupToSubscribe.removeSubscription(user);
         user.removeSubscription(groupToSubscribe);
@@ -173,7 +184,7 @@ public class ContactNetClass implements ContactNet {
     @Override
     public Iterator<User> listParticipants(String group) throws GroupNotExists, NoParticipants {
         Group result = showGroup(group);
-        if(!result.hasParticipants()) throw new NoParticipants();
+        if (!result.hasParticipants()) throw new NoParticipants();
         return result.participantsIterator();
     }
 
@@ -188,9 +199,9 @@ public class ContactNetClass implements ContactNet {
     public Iterator<Message> listContactMessages(String login1, String login2) throws UserNotExists, ContactNotExists, NoContactMessages {
         User user1 = showUser(login1);
         User user2 = showUser(login2);
-        if(!user1.hasContactWith(user2)) throw new ContactNotExists();
+        if (!user1.hasContactWith(user2)) throw new ContactNotExists();
         Iterator<Message> it = user1.messageIterator();
-        if(!it.hasNext()) throw new NoContactMessages();
+        if (!it.hasNext()) throw new NoContactMessages();
         return it;
     }
 
@@ -198,9 +209,9 @@ public class ContactNetClass implements ContactNet {
     public Iterator<Message> listGroupMessages(String group, String login) throws GroupNotExists, UserNotExists, SubscriptionNotExists, NoGroupMessages {
         Group g = showGroup(group);
         User user = showUser(login);
-        if(!g.hasSubscription(user)) throw new SubscriptionNotExists();
+        if (!g.hasSubscription(user)) throw new SubscriptionNotExists();
         Iterator<Message> it = g.listMessages();
-        if(!it.hasNext()) throw new NoGroupMessages();
+        if (!it.hasNext()) throw new NoGroupMessages();
         return it;
     }
 }

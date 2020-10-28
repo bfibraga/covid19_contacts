@@ -65,14 +65,13 @@ public class Main {
 
 
     public static void main(String[] args) {
-
-        Scanner in = new Scanner(System.in);
         String cmd;
         ContactNet net = new ContactNetClass();
         boolean exit = false;
 
         do {
             System.out.print(PROMPT);
+            Scanner in = new Scanner(System.in);
             cmd = in.next();
             if (cmd.equalsIgnoreCase(INSERT_USER))
                 insertUser(in, net);
@@ -90,7 +89,7 @@ public class Main {
                 showGroup(in, net);
             else if (cmd.equalsIgnoreCase(REMOVE_GROUP))
                 removeGroup(in, net);
-               else if (cmd.equalsIgnoreCase(INSERT_GROUP_PARTICIPANT))
+            else if (cmd.equalsIgnoreCase(INSERT_GROUP_PARTICIPANT))
                 subscribeGroup(in, net);
             else if (cmd.equalsIgnoreCase(REMOVE_GROUP_PARTICIPANT))
                 removeSubscription(in, net);

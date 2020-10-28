@@ -8,19 +8,71 @@ import network.dataStructures.OrderedSequence;
 import network.dataStructures.OrderedSequenceClass;
 
 /**
- * A class that
+ * A class that represents a <code>User</code>
+ * @author 57747_57833
  */
 public class UserClass implements User {
-
+    /**
+     * Login of the user as <code>String</code>
+     */
     private String login;
+
+    /**
+     * Name of this user as <code>String</code>
+     */
     private String name;
+
+    /**
+     * Age of this user as <code>Integer</code>
+     */
     private int age;
+
+    /**
+     * Address of this user as <code>String</code>
+     */
     private String address;
+
+    /**
+     * Profession of this user as <code>String</code>
+     */
     private String profession;
+
+    /**
+     * Collection of <code>Users</code> that represents all the contacts of this user saved in the contact network.
+     * We chose to use an OrderedSequence, which has a DoubleLinkedList, because this collection needed to be fast on
+     * inserting new elements, removing them and sorting the elements by the login of the <code>User</code> lexicographically
+     * in the command <bold>LC</bold> (listar contactos).
+     * Insertion and remove, best case scenario, take O(1) time to insert/remove (when on the first position).
+     * Worst case is O(n) time (when on the last position to insert/remove).
+     */
     private OrderedSequence<User> contacts;
+
+    /**
+     * Collection of groups that is saved in this user.
+     * It was chosen to use a DoublyLinkedList data structure as they will be a lot of inserts of groups (and possible
+     * removals). Insertion and remove, best case scenario, take O(1) time to insert/remove (when on the first position).
+     * Worst case is O(n) time (when on the last position to insert/remove).
+     * We didn't consider using an array to save the groups for the same reason mentioned above.
+     */
     private DoublyLinkedList<Group> groups;
+
+    /**
+     * Collection of messages that is saved in this user.
+     * It was chosen to use a DoublyLinkedList data structure as they will be a lot of inserts of groups (and possible
+     * removals). Insertion and remove, best case scenario, take O(1) time to insert/remove (when on the first position).
+     * Worst case is O(n) time (when on the last position to insert/remove).
+     * We didn't consider using an array to save the groups for the same reason mentioned above.
+     */
     private DoublyLinkedList<Message> messages;
 
+    /**
+     * <bold>Constructor:</bold> an given login, name, address and profession as <code>String</code> and a age as <code>Integer</code>.
+     * @param login A string to login
+     * @param name User's name
+     * @param age User's age
+     * @param address Address of this user
+     * @param profession Profession that this user possesses
+     */
     public UserClass(String login, String name, int age, String address, String profession) {
         this.login = login;
         this.name = name;

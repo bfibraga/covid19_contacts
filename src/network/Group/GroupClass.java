@@ -6,15 +6,39 @@ import network.Message.*;
 
 /**
  * An class that represents a <code>"Grupo"</code>.
+ * @author 57747_57833
  */
-public class GroupClass implements Group{
+public class GroupClass implements Group {
 
+    /**
+     * Name of this group as <code>String</code>
+     */
     private String name;
+
+    /**
+     * Description of this group as <code>String</code>
+     */
     private String description;
+
+    /**
+     * Collection of <code>Users</code> that represents all the participants of this group and saved in the contact network.
+     * We chose to use an OrderedSequence, which has a DoubleLinkedList, because this collection needed to be fast on
+     * inserting new elements, removing them and sorting the elements by the login of the <code>User</code> lexicographically.
+     * Insertion and remove, best case scenario, take O(1) time to insert/remove (when on the first position).
+     * Worst case is O(n) time (when on the last position to insert/remove).
+     */
     private OrderedSequence<User> participants;
+
+    /**
+     * Collection of <code>Messages</code> that contains all the messages by the users saved on the collection above.
+     * We chose to use an DoubleLinkedList because this collection needed to be fast on
+     * inserting new elements, removing them and list all the messages in order of insertion.
+     * Insertion and remove, best case scenario, take O(1) time to insert/remove (when on the first position).
+     * Worst case is O(n) time (when on the last position to insert/remove).
+     */
     private DoublyLinkedList<Message> messages;
 
-    public GroupClass(String name, String text){
+    public GroupClass(String name, String text) {
         this.name = name;
         this.description = text;
         participants = new OrderedSequenceClass<User>();
@@ -56,7 +80,7 @@ public class GroupClass implements Group{
     public void removeAllParticipants() {
 
         Iterator<User> subscribers = participants.iterator();
-        while(subscribers.hasNext()){
+        while (subscribers.hasNext()) {
             User user = subscribers.next();
             user.removeSubscription(this);
         }
