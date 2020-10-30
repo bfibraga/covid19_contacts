@@ -18,6 +18,7 @@ public class ContactNetClass implements ContactNet {
      * which will cause the array to resize multiple times, making response time very long.
      */
     private OrderedSequence<User> users;
+
     /**
      * Collection of groups that is saved in the contact network.
      * It was chosen to use a "DoublyLinkedList" data structure as they will be a lot of inserts of groups (and possible
@@ -93,9 +94,8 @@ public class ContactNetClass implements ContactNet {
 
     }
 
-
-
     @Override
+    @SuppressWarnings("unchecked")
     public Iterator<UserData> listContacts(String login) throws UserNotExists, NoContacts {
         User user = showUser(login);
         if(user == null) throw new UserNotExists();

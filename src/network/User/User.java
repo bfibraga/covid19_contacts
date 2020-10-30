@@ -6,6 +6,7 @@ import network.dataStructures.Iterator;
 
 /**
  * An interface that represents a <code>"Utilizador"</code> of the system.
+ * @author 57747_57833
  */
 public interface User extends UserData, Comparable<User>{
 
@@ -55,6 +56,7 @@ public interface User extends UserData, Comparable<User>{
     /**
      * Removes a subscription to a given group, causing the user to not be able to see its messages.
      * @param group Group from which the user wishes to leave
+     * @pre group != null
      */
     void removeSubscription(Group group);
 
