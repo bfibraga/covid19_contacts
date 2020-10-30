@@ -44,7 +44,7 @@ public interface User extends UserData, Comparable<User>{
      * @return An iterator that iterates throughout the user's contacts
      * @pre hasContacts();
      */
-    Iterator<User> contactIterator();
+    Iterator<? extends UserData> contactIterator();
 
     /**
      * Checks if the user hasn't passed the 10 groups limit.

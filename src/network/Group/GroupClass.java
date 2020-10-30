@@ -38,7 +38,7 @@ public class GroupClass implements Group{
     }
 
     @Override
-    public Iterator<User> participantsIterator() {
+    public Iterator<? extends UserData> participantsIterator() {
         return participants.iterator();
     }
 

@@ -68,7 +68,7 @@ public class UserClass implements User {
     }
 
     @Override
-    public Iterator<User> contactIterator() {
+    public Iterator<? extends UserData> contactIterator() {
         return contacts.iterator();
     }
 

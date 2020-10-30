@@ -8,7 +8,7 @@ public interface Group extends GroupData{
 
     boolean hasParticipants();
 
-    Iterator<User> participantsIterator();
+    Iterator<? extends UserData> participantsIterator();
 
     boolean hasSubscription(User user);
 

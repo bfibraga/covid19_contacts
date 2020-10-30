@@ -65,7 +65,7 @@ public interface ContactNet {
      * @throws NoContacts when the user doesn't have any contacts to list
      * @pre login != null
      */
-    Iterator<User> listContacts(String login)
+    Iterator<UserData> listContacts(String login)
             throws UserNotExists, NoContacts;
 
     /**
@@ -129,7 +129,7 @@ public interface ContactNet {
      * @throws NoParticipants when the group doesn't have any users subscribed to it
      * @pre group != null
      */
-    Iterator<User> listParticipants(String group)
+    Iterator<UserData> listParticipants(String group)
             throws GroupNotExists, NoParticipants;
 
     /**
