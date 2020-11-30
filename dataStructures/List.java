@@ -18,33 +18,33 @@ public interface List<E> extends Serializable
      * Returns true iff the list contains no elements.
      * @return true if list is empty
      */
-    boolean isEmpty();
+    boolean isEmpty( );
 
     /**
      * Returns the number of elements in the list.
      * @return number of elements in the list
      */
-    int size();
+    int size( );
 
     /**
      *  Returns an iterator of the elements in the list (in proper sequence).
      * @return Iterator of the elements in the list
      */
-    Iterator<E> iterator();
+    Iterator<E> iterator( );
 
     /**
      * Returns the first element of the list.
      * @return first element in the list
      * @throws EmptyListException - if size() == 0
      */
-    E getFirst() throws NoElementException;
+    E getFirst( ) throws NoElementException;
 
     /**
      * Returns the last element of the list.
      * @return last element in the list
      * @throws EmptyListException - if size() == 0
      */
-    E getLast() throws NoElementException;
+    E getLast( ) throws NoElementException;
  
     /**
      * Returns the element at the specified position in the list.
@@ -55,7 +55,7 @@ public interface List<E> extends Serializable
      * @return element at position
      * @throws InvalidPositionException if position is not valid in the list
      */
-    E get(int position) throws InvalidPositionException;
+    E get( int position ) throws InvalidPositionException;
 
     /**
      * Returns the position of the first occurrence of the specified element
@@ -64,19 +64,19 @@ public interface List<E> extends Serializable
      * @param element - element to be searched in list
      * @return position of the first occurrence of the element in the list (or -1)
      */
-    int find(E element);
+    int find( E element );
 
     /**
      * Inserts the specified element at the first position in the list.
      * @param element to be inserted
      */
-    void addFirst(E element);
+    void addFirst( E element );
 
     /**
      * Inserts the specified element at the last position in the list.
      * @param element to be inserted
      */
-    void addLast(E element);
+    void addLast( E element );
 
     /**
      * Inserts the specified element at the specified position in the list.
@@ -87,21 +87,21 @@ public interface List<E> extends Serializable
      * @param element - element to be inserted
      * @throws InvalidPositionException - if position is not valid in the list
      */
-    void add(int position, E element) throws InvalidPositionException;
+    void add( int position, E element ) throws InvalidPositionException;
 
     /**
      * Removes and returns the element at the first position in the list.
      * @return element removed from the first position of the list
      * @throws EmptyListException - if size() == 0
      */
-    E removeFirst() throws NoElementException;
+    E removeFirst( ) throws NoElementException;
 
     /**
      * Removes and returns the element at the last position in the list.
      * @return element removed from the last position of the list
      * @throws EmptyListException - if size() == 0
      */
-    E removeLast() throws NoElementException;
+    E removeLast( ) throws NoElementException;
 
     /**
      *  Removes and returns the element at the specified position in the list.
@@ -112,7 +112,7 @@ public interface List<E> extends Serializable
      * @return element removed at position 
      * @throws InvalidPositionException - if position is not valid in the list
      */
-    E remove(int position) throws InvalidPositionException;
+    E remove( int position ) throws InvalidPositionException;
 
     /**
      * Removes the first occurrence of the specified element from the list
@@ -121,7 +121,7 @@ public interface List<E> extends Serializable
      * @param element - element to be removed from list
      * @return true if the remove was successful, false otherwise
      */
-    boolean remove(E element);
+    boolean remove( E element );
 
 }   
 

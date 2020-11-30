@@ -18,20 +18,20 @@ public interface Iterator<E> extends Serializable
      * rather than throwing an exception.
      * @return true iff the iteration has more elements
      */
-	boolean hasNext();
+	boolean hasNext( );
 
     /**
      * Returns the next element in the iteration.
      * @return the next element in the iteration
      * @throws NoSuchElementException - if call is made without verifying pre-condition
      */
-    E next() throws NoSuchElementException;
+    E next( ) throws NoSuchElementException;
 
     /**
      * Restarts the iteration.
      * After rewind, if the iteration is not empty,
      * next will return the first element in the iteration.
      */
-    void rewind();
+    void rewind( );
 
 }

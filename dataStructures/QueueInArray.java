@@ -7,7 +7,7 @@ package dataStructures;
  * @param <E> Generic Element
  * 
  */
-public class QueueInArray<E> implements Queue<E>
+public class QueueInArray<E> implements dataStructures.Queue<E>
 {                                     
 
 	/**

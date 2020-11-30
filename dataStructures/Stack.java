@@ -20,33 +20,33 @@ public interface Stack<E> extends Serializable
      *  Returns true iff the stack contains no elements.
      * @return true iff the stack contains no elements, false otherwise
      */
-    public boolean isEmpty();
+    public boolean isEmpty( );
 
     /**
      *  Returns the number of elements in the stack.
      * @return number of elements in the stack
      */
-    int size();
+    int size( );
 
     /**
      *  Returns the element at the top of the stack.
      * @return element at top of stack
      * @throws EmptyStackException when stack = 0
      */
-    E top() throws NoElementException;
+    E top( ) throws NoElementException;
 
     /**
      *  Inserts the specified <code>element</code> onto the top of the stack.
      * @param element element to be inserted onto the stack
      */
-    void push(E element);
+    void push( E element );
 
     /**
      *  Removes and returns the element at the top of the stack.
      * @return element removed from top of stack
      * @throws EmptyStackException when stack = 0
      */
-    E pop() throws NoElementException;
+    E pop( ) throws NoElementException;
 
 }
 

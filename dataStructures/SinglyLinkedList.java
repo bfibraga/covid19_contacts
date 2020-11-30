@@ -218,4 +218,15 @@ public class SinglyLinkedList<E> implements List<E> {
 		return true;
 
 	}
+
+
+	protected E get(E element) {
+		Iterator<E> it = iterator();
+		E elem;
+		while(it.hasNext()){
+			elem = it.next();
+			if(elem.equals(element)) return elem;
+		}
+		return null;
+	}
 }

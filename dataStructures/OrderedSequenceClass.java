@@ -14,14 +14,14 @@ public class OrderedSequenceClass<E extends Comparable<E>> implements OrderedSeq
         boolean equalsOrHigher = false;
         int pos = 0;
 
-
-        while(it.hasNext() && !equalsOrHigher){
-            current = it.next();
-            if(current.compareTo(element)>=0)
-                equalsOrHigher = true;
-            else pos++;
+        if(!list.isEmpty()){
+            while(it.hasNext() && equalsOrHigher){
+                current = it.next();
+                if(element.compareTo(current)>=0)
+                    equalsOrHigher = true;
+                else pos++;
+            }
         }
-
         list.add(pos, element);
     }
 
@@ -32,17 +32,22 @@ public class OrderedSequenceClass<E extends Comparable<E>> implements OrderedSeq
 
     @Override
     public boolean contains(E element) {
-        E result = get(element);
-        return result != null;
+        Iterator<E> it = iterator();
+
+        while(it.hasNext()){
+            E elem = it.next();
+            if(elem.equals(element)) return true;
+        }
+        return false;
     }
 
     @Override
     public E get(E element) {
         Iterator<E> it = iterator();
-        E result;
+        E elem;
         while(it.hasNext()){
-            result = it.next();
-            if(result.equals(element)) return result;
+            elem = it.next();
+            if(elem.equals(element)) return elem;
         }
         return null;
     }
@@ -52,30 +57,4 @@ public class OrderedSequenceClass<E extends Comparable<E>> implements OrderedSeq
         return list.iterator();
     }
 
-    @Override
-    public boolean isEmpty(){
-        return list.isEmpty();
-    }
-
-    @Override
-    public int getCurrentSize() {
-        return list.size();
-    }
-
-    /**
-     * Binary search to find for the element. Takes O(n) * amount of times the "get" method of List is called, which is
-     * also O(n) so it's not the best way to find for the element
-     * @param first first element of the list
-     * @param last last element of the list
-     * @param elem elem that we're looking for
-     * @return the element that is equal to the elem we're using for looking or null if it didn't find it in the list
-     */
-    private E binarySearch(int first, int last, E elem){
-        if(last < first) return null;
-        int mid = first + (last-first)/2;
-        E element = list.get(mid);
-        if (element.equals(elem)) return element;
-        if (element.compareTo(elem) > 0) return binarySearch(first, mid-1, elem);
-        return binarySearch(mid+1, last, elem);
-    }
 }
