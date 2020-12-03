@@ -1,17 +1,21 @@
 package network.User;
 
+import dataStructures.*;
+import network.Exceptions.SubscriptionNotExists;
 import network.Group.*;
 import network.Message.*;
-import network.dataStructures.DoublyLinkedList;
-import network.dataStructures.Iterator;
-import network.dataStructures.OrderedSequence;
-import network.dataStructures.OrderedSequenceClass;
 
 /**
  * A class that represents a <code>User</code>
  * @author 57747_57833
  */
 public class UserClass implements User {
+
+    /**
+     * TODO
+     */
+    private static final int DEFAULT_GROUP_SIZE = 10;
+
     /**
      * Login of the user as <code>String</code>
      */
@@ -38,32 +42,19 @@ public class UserClass implements User {
     private String profession;
 
     /**
-     * Collection of <code>Users</code> that represents all the contacts of this user saved in the contact network.
-     * We chose to use an OrderedSequence, which has a DoubleLinkedList, because this collection needed to be fast on
-     * inserting new elements, removing them and sorting the elements by the login of the <code>User</code> lexicographically
-     * in the command <bold>LC</bold> (listar contactos).
-     * Insertion and remove, best case scenario, take O(1) time to insert/remove (when on the first position).
-     * Worst case is O(n) time (when on the last position to insert/remove).
+     * TODO
      */
-    private OrderedSequence<User> contacts;
+    private OrderedDictionary<String, User> contacts;
 
     /**
-     * Collection of groups that is saved in this user.
-     * It was chosen to use a DoublyLinkedList data structure as they will be a lot of inserts of groups (and possible
-     * removals). Insertion and remove, best case scenario, take O(1) time to insert/remove (when on the first position).
-     * Worst case is O(n) time (when on the last position to insert/remove).
-     * We didn't consider using an array to save the groups for the same reason mentioned above.
+     * TODO
      */
-    private DoublyLinkedList<Group> groups;
+    private Dictionary<String, Group> groups;
 
     /**
-     * Collection of messages that is saved in this user.
-     * It was chosen to use a DoublyLinkedList data structure as they will be a lot of inserts of groups (and possible
-     * removals). Insertion and remove, best case scenario, take O(1) time to insert/remove (when on the first position).
-     * Worst case is O(n) time (when on the last position to insert/remove).
-     * We didn't consider using an array to save the groups for the same reason mentioned above.
+     * TODO
      */
-    private DoublyLinkedList<Message> messages;
+    private List<Message> messages;
 
     /**
      * <bold>Constructor:</bold> an given login, name, address and profession as <code>String</code> and a age as <code>Integer</code>.
@@ -79,9 +70,9 @@ public class UserClass implements User {
         this.age = age;
         this.address = address;
         this.profession = profession;
-        contacts = new OrderedSequenceClass<User>();
-        groups = new DoublyLinkedList<Group>();
-        messages = new DoublyLinkedList<Message>();
+        contacts = new BinarySearchTree<>();
+        groups = new ChainedHashTable<>(10);
+        messages = new SinglyLinkedList<>();
     }
 
     @Override
@@ -111,7 +102,7 @@ public class UserClass implements User {
 
     @Override
     public void addContact(User toBeInserted) {
-        contacts.insert(toBeInserted);
+        contacts.insert(toBeInserted.getLogin(), toBeInserted);
     }
 
     @Override
@@ -121,7 +112,7 @@ public class UserClass implements User {
 
     @Override
     public Iterator<? extends UserData> contactIterator() {
-        return contacts.iterator();
+        return contacts.iteratorValue();
     }
 
     @Override
@@ -131,24 +122,31 @@ public class UserClass implements User {
 
     @Override
     public void subscribe(Group group){
-        if(canJoinGroup()) groups.addFirst(group);
+        if(canJoinGroup()) groups.insert(group.getName(), group);
+    }
+
+    @Override
+    public boolean hasSubscription(Group selected_group) {
+        return groups.find(selected_group.getName()) != null;
     }
 
     @Override
     public void removeSubscription(Group group) {
-        groups.remove(group);
+        if (groups.find(group.getName()) == null)
+            throw new SubscriptionNotExists();
+        groups.remove(group.getName());
     }
 
     @Override
     public void createMessage(Message msg) {
         this.insertMessage(msg);
-        Iterator<Group> itGroup = groups.iterator();
+        Iterator<Group> itGroup = groups.iteratorValue();
         while(itGroup.hasNext()){
             Group group = itGroup.next();
             group.insertMessage(msg);
         }
 
-        Iterator<User> itContacts = contacts.iterator();
+        Iterator<User> itContacts = contacts.iteratorValue();
         while(itContacts.hasNext()){
             User user = itContacts.next();
             user.insertMessage(msg);
@@ -157,12 +155,12 @@ public class UserClass implements User {
 
     @Override
     public boolean removeContact(User toBeRemoved) {
-        return contacts.remove(toBeRemoved);
+        return contacts.remove(toBeRemoved.getLogin()) != null;
     }
 
     @Override
     public boolean hasContactWith(User current) {
-        return this.equals(current) || contacts.contains(current);
+        return this.equals(current) || contacts.find(current.getLogin()) != null;
     }
 
     @Override

@@ -2,7 +2,7 @@ package network.Group;
 
 import network.Message.Message;
 import network.User.*;
-import network.dataStructures.Iterator;
+import dataStructures.Iterator;
 
 /**
  * An interface that represents a <code>Group</code> of <code>Users</code> in the system
@@ -24,16 +24,6 @@ public interface Group extends GroupData {
      * @return A <code>Iterator</code> of type <code>User</code>
      */
     Iterator<? extends UserData> participantsIterator();
-
-    /**
-     * Checks if the current <code>Group</code> has this <code>user</code> as participant
-     *
-     * @param user - A user to check if he is on this group
-     * @return <color=green>True</color> - if this has participant
-     * <color=red>False</color> - if this group don't have any participants
-     * @pre: user != null
-     */
-    boolean hasSubscription(User user);
 
     /**
      * Removes the subscription of <code>user</code> from this group

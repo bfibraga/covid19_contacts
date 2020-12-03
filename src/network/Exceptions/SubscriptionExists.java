@@ -1,4 +1,4 @@
 package network.Exceptions;
 
-public class SubscriptionExists extends Exception {
+public class SubscriptionExists extends RuntimeException {
 }

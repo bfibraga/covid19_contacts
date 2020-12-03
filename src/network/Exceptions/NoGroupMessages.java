@@ -1,4 +1,4 @@
 package network.Exceptions;
 
-public class NoGroupMessages extends Exception {
+public class NoGroupMessages extends RuntimeException {
 }

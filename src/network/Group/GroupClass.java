@@ -1,7 +1,7 @@
 package network.Group;
 
 import network.User.*;
-import network.dataStructures.*;
+import dataStructures.*;
 import network.Message.*;
 
 /**
@@ -21,13 +21,9 @@ public class GroupClass implements Group {
     private String description;
 
     /**
-     * Collection of <code>Users</code> that represents all the participants of this group and saved in the contact network.
-     * We chose to use an OrderedSequence, which has a DoubleLinkedList, because this collection needed to be fast on
-     * inserting new elements, removing them and sorting the elements by the login of the <code>User</code> lexicographically.
-     * Insertion and remove, best case scenario, take O(1) time to insert/remove (when on the first position).
-     * Worst case is O(n) time (when on the last position to insert/remove).
+     *
      */
-    private OrderedSequence<User> participants;
+    private OrderedDictionary<String, User> participants;
 
     /**
      * Collection of <code>Messages</code> that contains all the messages by the users saved on the collection above.
@@ -36,13 +32,13 @@ public class GroupClass implements Group {
      * Insertion and remove, best case scenario, take O(1) time to insert/remove (when on the first position).
      * Worst case is O(n) time (when on the last position to insert/remove).
      */
-    private DoublyLinkedList<Message> messages;
+    private List<Message> messages;
 
     public GroupClass(String name, String text) {
         this.name = name;
         this.description = text;
-        participants = new OrderedSequenceClass<User>();
-        messages = new DoublyLinkedList<Message>();
+        participants = new BinarySearchTree<>();
+        messages = new SinglyLinkedList<>();
     }
 
 
@@ -63,23 +59,18 @@ public class GroupClass implements Group {
 
     @Override
     public Iterator<User> participantsIterator() {
-        return participants.iterator();
-    }
-
-    @Override
-    public boolean hasSubscription(User user) {
-        return participants.contains(user);
+        return participants.iteratorValue();
     }
 
     @Override
     public void removeSubscription(User user) {
-        participants.remove(user);
+        participants.remove(user.getLogin());
     }
 
     @Override
     public void removeAllParticipants() {
 
-        Iterator<User> subscribers = participants.iterator();
+        Iterator<User> subscribers = participants.iteratorValue();
         while (subscribers.hasNext()) {
             User user = subscribers.next();
             user.removeSubscription(this);
@@ -106,7 +97,7 @@ public class GroupClass implements Group {
 
     @Override
     public void addSubscription(User user) {
-        participants.insert(user);
+        participants.insert(user.getLogin(), user);
     }
 
     @Override

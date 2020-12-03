@@ -1,4 +1,4 @@
 package network.Exceptions;
 
-public class GroupExists extends Exception {
+public class GroupExists extends RuntimeException {
 }

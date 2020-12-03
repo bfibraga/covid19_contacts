@@ -1,4 +1,4 @@
 package network.Exceptions;
 
-public class NoParticipants extends Exception {
+public class NoParticipants extends RuntimeException {
 }

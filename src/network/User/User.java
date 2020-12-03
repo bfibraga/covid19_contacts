@@ -2,7 +2,7 @@ package network.User;
 
 import network.Group.Group;
 import network.Message.Message;
-import network.dataStructures.Iterator;
+import dataStructures.Iterator;
 
 /**
  * An interface that represents a <code>"Utilizador"</code> of the system.
@@ -88,4 +88,12 @@ public interface User extends UserData, Comparable<User>{
      * @pre group != null && canJoinGroup()
      */
     void subscribe(Group group);
+
+    /**
+     * Checks if the user has a subscription in the given group, checking their own subscriptions
+     * @param selected_group Group where we are checking if they are in it or not
+     * @return true if the group is in the subscription list, false if otherwise
+     * @pre group != null
+     */
+    boolean hasSubscription(Group selected_group);
 }

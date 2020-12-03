@@ -1,18 +1,12 @@
-import network.ContactNet.*;
-import network.Exceptions.*;
 import network.Group.*;
 import network.Message.Message;
 import network.User.*;
-import network.dataStructures.*;
+import dataStructures.Iterator;
+import network.ContactNet.ContactNet;
+import network.ContactNet.ContactNetClass;
+import network.Exceptions.*;
 
 import java.util.Scanner;
-
-//TODO
-//import *** OS VOSSOS IMPORTS AQUI ***
-//EX: Se quiserem separar as excepcoes das interfaces e
-//classes de dominio (cujo pacote se chama network neste exemplo):
-//import network.*;
-//import network.exceptions.*;
 
 public class Main {
 
@@ -270,7 +264,7 @@ public class Main {
         String name = in.nextLine().trim().toUpperCase();
         in.nextLine();
         try {
-            GroupData    g = net.showGroup(name);
+            GroupData g = net.showGroup(name);
             System.out.println(g.getName());
             System.out.println(g.getDescription());
         } catch (GroupNotExists e) {
@@ -440,9 +434,9 @@ public class Main {
         while (messages.hasNext()) {
             Message m = messages.next();
             System.out.printf("%s\n%s\n%s\n", m.getTitle(), m.getDescription(), m.getURL());
-            System.out.println();
+            if (messages.hasNext())
+                System.out.println();
         }
-
     }
 
 

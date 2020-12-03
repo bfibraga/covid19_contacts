@@ -1,4 +1,4 @@
 package network.Exceptions;
 
-public class ContactNotRemoved extends Exception {
+public class ContactNotRemoved extends RuntimeException {
 }
