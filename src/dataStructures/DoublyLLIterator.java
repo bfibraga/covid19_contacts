@@ -9,6 +9,7 @@ package dataStructures;
  */
 
 import dataStructures.DoublyLinkedList.DListNode;
+import network.Exceptions.NoSuchElementException;
 
 class DoublyLLIterator<E> implements TwoWayIterator<E>
 {

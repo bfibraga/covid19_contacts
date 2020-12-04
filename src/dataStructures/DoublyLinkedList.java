@@ -2,6 +2,7 @@ package dataStructures;
 
 
 import network.Exceptions.InvalidPositionException;
+import network.Exceptions.NoElementException;
 
 /**
  * Doubly linked list Implementation 
@@ -277,9 +278,9 @@ public class DoublyLinkedList<E> implements List<E>  {
 	}
 
 	/**
-	 * TODO
-	 * @param element
-	 * @return
+	 * Find the <code>DListNode</code> with this <code>element</code>
+	 * @param element -
+	 * @return DListNode with this <code>element</code>, otherwise returns null
 	 */
     private DListNode<E> findNode(E element) {
         DListNode<E> auxNode = head;
@@ -301,11 +302,9 @@ public class DoublyLinkedList<E> implements List<E>  {
 	}
 
     /**
-	 *
      * Removes all of the elements from the specified list and
      * inserts them at the end of the list (in proper sequence).
      * @param list - list to be appended to the end of this
-	 * TODO
      */
     public void append( DoublyLinkedList<E> list )
     {
@@ -324,7 +323,6 @@ public class DoublyLinkedList<E> implements List<E>  {
 			list.head = null;
 			list.tail = null;
 			list.currentSize = 0;
-
 		}
     }
 

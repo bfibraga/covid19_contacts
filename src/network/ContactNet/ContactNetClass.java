@@ -6,20 +6,24 @@ import network.User.*;
 import network.Message.*;
 import dataStructures.*;
 
+/**
+ * An class that executes all the commands of <code>Main</code>
+ * @author 57747_57833
+ */
 public class ContactNetClass implements ContactNet {
 
     /**
-     * TODO
+     * Collection of all users in the program
      */
     private Dictionary<String, User> users;
 
     /**
-     * TODO
+     * Collection of all groups in the program
      */
     private Dictionary<String, Group> groups;
 
     /**
-     * TODO
+     * <bold>Constructor:</bold> initializes the collection of users and the collection of groups
      */
     public ContactNetClass(){
         users = new ChainedHashTable<>();
@@ -33,14 +37,6 @@ public class ContactNetClass implements ContactNet {
         users.insert(login, user);
     }
 
-    @Override
-    public User showUser(String login) throws UserNotExists {
-        User found = users.find(login);
-        if (found == null) throw new UserNotExists();
-        return found;
-
-    }
-
     /**
      * Searchs throughout the list of users for an user that has the same login as the one given
      * @param login Login of the user to be found
@@ -49,7 +45,15 @@ public class ContactNetClass implements ContactNet {
      */
     private boolean userExists(String login) {
         return users.find(login) != null;
-     }
+    }
+
+    @Override
+    public User showUser(String login) throws UserNotExists {
+        User found = users.find(login);
+        if (found == null) throw new UserNotExists();
+        return found;
+
+    }
 
     @Override
     public void insertContact(String login1, String login2) throws UserNotExists, ContactExists {

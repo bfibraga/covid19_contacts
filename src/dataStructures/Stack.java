@@ -3,6 +3,8 @@
  */
 package dataStructures;
 
+import network.Exceptions.NoElementException;
+
 import java.io.Serializable;
 
 /**

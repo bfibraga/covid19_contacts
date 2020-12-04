@@ -21,19 +21,20 @@ public class GroupClass implements Group {
     private String description;
 
     /**
-     *
+     *Collection that contains all the user participating on this group
      */
     private OrderedDictionary<String, User> participants;
 
     /**
-     * Collection of <code>Messages</code> that contains all the messages by the users saved on the collection above.
-     * We chose to use an DoubleLinkedList because this collection needed to be fast on
-     * inserting new elements, removing them and list all the messages in order of insertion.
-     * Insertion and remove, best case scenario, take O(1) time to insert/remove (when on the first position).
-     * Worst case is O(n) time (when on the last position to insert/remove).
+     * Collection that contains all the messages by the users saved on the collection above.
      */
     private List<Message> messages;
 
+    /**
+     *  <bold>Constructor:</bold> initialize a group name and its description as <code>String</code>.
+     * @param name - Name of the group
+     * @param text - Description of the group
+     */
     public GroupClass(String name, String text) {
         this.name = name;
         this.description = text;

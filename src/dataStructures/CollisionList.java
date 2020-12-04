@@ -45,9 +45,15 @@ public class CollisionList<K, V> implements Dictionary<K,V> {
         }
 
     }
+    //(Pointer to) the head node.
     CDListNode<K,V> head;
+
+    //(Pointer to) the tail node.
     CDListNode<K,V> tail;
+
+    //Size of this list.
     int currentSize;
+
     public CollisionList(){
         head = null;
         tail = null;
@@ -66,13 +72,13 @@ public class CollisionList<K, V> implements Dictionary<K,V> {
 
     @Override
     public V find(K key) {
-            CDListNode<K,V> node = head;
-            if(node == null) return null;
+        CDListNode<K,V> node = head;
+        if(node == null) return null;
+        if (node.getElement().getKey().equals(key)) return node.getElement().getValue();
+        while(node.getNext() != null){
+            node = node.getNext();
             if (node.getElement().getKey().equals(key)) return node.getElement().getValue();
-            while(node.getNext() != null){
-                node = node.getNext();
-                if (node.getElement().getKey().equals(key)) return node.getElement().getValue();
-            }
+        }
         return null;
     }
 

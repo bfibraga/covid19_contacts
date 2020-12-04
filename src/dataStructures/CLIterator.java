@@ -9,7 +9,7 @@ import dataStructures.CollisionList.CDListNode;
  * 
  */
 
-import dataStructures.DoublyLinkedList.DListNode;
+import network.Exceptions.NoSuchElementException;
 
 class CLIterator<K,V> implements TwoWayIterator<Entry<K,V>>
 {

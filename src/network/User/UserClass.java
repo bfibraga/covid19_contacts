@@ -12,9 +12,9 @@ import network.Message.*;
 public class UserClass implements User {
 
     /**
-     * TODO
+     * Maximum number of groups per user
      */
-    private static final int DEFAULT_GROUP_SIZE = 10;
+    private static final int MAX_GROUP_SIZE = 10;
 
     /**
      * Login of the user as <code>String</code>
@@ -42,17 +42,17 @@ public class UserClass implements User {
     private String profession;
 
     /**
-     * TODO
+     * Collection of contacts with login as key and user as value
      */
     private OrderedDictionary<String, User> contacts;
 
     /**
-     * TODO
+     * Collection of groups with group name as key and group as value
      */
     private Dictionary<String, Group> groups;
 
     /**
-     * TODO
+     * Collection of all messages sent and/or received
      */
     private List<Message> messages;
 
@@ -71,7 +71,7 @@ public class UserClass implements User {
         this.address = address;
         this.profession = profession;
         contacts = new BinarySearchTree<>();
-        groups = new ChainedHashTable<>(10);
+        groups = new ChainedHashTable<>(MAX_GROUP_SIZE);
         messages = new SinglyLinkedList<>();
     }
 

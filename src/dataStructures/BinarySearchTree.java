@@ -1,5 +1,7 @@
 package dataStructures;
 
+import network.Exceptions.NoElementException;
+
 /**
  * BinarySearchTree implementation
  * @author AED team

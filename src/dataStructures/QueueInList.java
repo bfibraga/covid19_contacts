@@ -1,4 +1,6 @@
-package dataStructures;                                          
+package dataStructures;
+
+import network.Exceptions.NoElementException;
 
 /**
  * Queue List Implementation 
@@ -52,7 +54,7 @@ public class QueueInList<E> implements Queue<E>
 
 
     @Override
-    public E dequeue( ) throws NoElementException   
+    public E dequeue( ) throws NoElementException
     {
         if ( list.isEmpty() )
             throw new NoElementException();

@@ -1,5 +1,8 @@
 package dataStructures;
 
+import network.Exceptions.NoElementException;
+import network.Exceptions.OutOfCapacityException;
+
 /**
  * Queue Array Implementation 
  * @author AED  Team
@@ -103,7 +106,7 @@ public class QueueInArray<E> implements dataStructures.Queue<E>
      * @param element - element to be added to the end of the queue
      * @throws FullQueueException when queue is full
      */
-    public void enqueue( E element ) throws OutOfCapacityException    
+    public void enqueue( E element ) throws OutOfCapacityException
     {
         if ( this.isFull() )
             throw new OutOfCapacityException();
@@ -115,7 +118,7 @@ public class QueueInArray<E> implements dataStructures.Queue<E>
 
 
     @Override
-    public E dequeue( ) throws NoElementException   
+    public E dequeue( ) throws NoElementException
     {
         if ( this.isEmpty() )
             throw new NoElementException();

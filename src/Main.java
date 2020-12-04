@@ -84,7 +84,7 @@ public class Main {
                 showGroup(in, net);
             else if (cmd.equalsIgnoreCase(REMOVE_GROUP))
                 removeGroup(in, net);
-               else if (cmd.equalsIgnoreCase(INSERT_GROUP_PARTICIPANT))
+            else if (cmd.equalsIgnoreCase(INSERT_GROUP_PARTICIPANT))
                 subscribeGroup(in, net);
             else if (cmd.equalsIgnoreCase(REMOVE_GROUP_PARTICIPANT))
                 removeSubscription(in, net);

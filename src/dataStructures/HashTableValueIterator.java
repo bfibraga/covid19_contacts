@@ -1,5 +1,7 @@
 package dataStructures;
 
+import network.Exceptions.NoSuchElementException;
+
 public class HashTableValueIterator<K,V> implements Iterator<V> {
     private Dictionary<K,V>[] table;
     private Dictionary<K,V> collisionList;

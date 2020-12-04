@@ -1,5 +1,7 @@
 package dataStructures;
 
+import network.Exceptions.NoSuchElementException;
+
 /**
  * TwoWayIterator Abstract Data Type 
  * Includes description of general methods for two way iterator.

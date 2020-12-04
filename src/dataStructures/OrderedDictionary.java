@@ -1,4 +1,6 @@
-package dataStructures;  
+package dataStructures;
+
+import network.Exceptions.NoElementException;
 
 /**
  * Ordered Dictionary interface

@@ -2,6 +2,7 @@ package network.Group;
 
 /**
  * An interface that represents all the group data has, such as the group <code>name</code> and it's <code>description</code>
+ * @author 57747_57833
  */
 public interface GroupData {
 

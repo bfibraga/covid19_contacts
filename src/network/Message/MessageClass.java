@@ -22,7 +22,7 @@ public class MessageClass implements Message{
     private String url;
 
     /**
-     * Creates a message with a given title, description and url
+     * <bold>Constructor:</bold> Creates a message with a given title, description and url
      * @param title Title of the message
      * @param description Description of the message
      * @param url URL of the message

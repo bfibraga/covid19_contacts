@@ -1,5 +1,8 @@
 package dataStructures;
 
+import network.Exceptions.NoElementException;
+import network.Exceptions.OutOfCapacityException;
+
 /**
  * Stack Array Implementation 
  * @author AED  Team

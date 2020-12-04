@@ -1,5 +1,7 @@
 package dataStructures;
 
+import network.Exceptions.NoElementException;
+
 public class StackInList<E> implements Stack<E>
 {
 
@@ -31,7 +33,7 @@ public class StackInList<E> implements Stack<E>
 
 
     // Returns the element at the top of the stack.
-    public E top( ) throws NoElementException 
+    public E top( ) throws NoElementException
     {     
         if ( list.isEmpty() )
             throw new NoElementException();
