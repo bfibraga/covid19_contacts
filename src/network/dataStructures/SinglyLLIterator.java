@@ -8,6 +8,7 @@ package network.dataStructures;
  * 
  */
 import network.dataStructures.SinglyLinkedList.SListNode;
+import network.Exceptions.NoSuchElementException;
 
 
 public class SinglyLLIterator<E> implements Iterator<E> {

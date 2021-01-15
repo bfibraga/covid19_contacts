@@ -1,7 +1,7 @@
 import network.Group.*;
 import network.Message.Message;
 import network.User.*;
-import dataStructures.Iterator;
+import network.dataStructures.Iterator;
 import network.ContactNet.ContactNet;
 import network.ContactNet.ContactNetClass;
 import network.Exceptions.*;
@@ -434,9 +434,9 @@ public class Main {
         while (messages.hasNext()) {
             Message m = messages.next();
             System.out.printf("%s\n%s\n%s\n", m.getTitle(), m.getDescription(), m.getURL());
-            if (messages.hasNext())
-                System.out.println();
+            System.out.println();
         }
+
     }
 
 

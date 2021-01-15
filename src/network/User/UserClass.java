@@ -1,6 +1,6 @@
 package network.User;
 
-import dataStructures.*;
+import network.dataStructures.*;
 import network.Exceptions.SubscriptionNotExists;
 import network.Group.*;
 import network.Message.*;
@@ -70,7 +70,7 @@ public class UserClass implements User {
         this.age = age;
         this.address = address;
         this.profession = profession;
-        contacts = new BinarySearchTree<>();
+        contacts = new AVLTree<>();
         groups = new ChainedHashTable<>(MAX_GROUP_SIZE);
         messages = new SinglyLinkedList<>();
     }

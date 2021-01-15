@@ -1,6 +1,9 @@
 package network.dataStructures;
 
 
+import network.Exceptions.InvalidPositionException;
+import network.Exceptions.NoElementException;
+
 /**
  * Doubly linked list Implementation 
  * @author AED  Team
@@ -88,10 +91,9 @@ public class DoublyLinkedList<E> implements List<E>  {
 
 	@Override
 	public int find(E element) {
-		int pos=0;
 		DListNode<E> auxNo = head;
 		if (head.getElement().equals(element)) return 0;
-		for(int i = 1; i < size(); i++){
+		for(int i = 1; i < size() ; i++){
             auxNo = auxNo.getNext();
             if(auxNo.getElement().equals(element)) return i;
         }
@@ -157,7 +159,7 @@ public class DoublyLinkedList<E> implements List<E>  {
 
 		previous.setNext(toInsert);
 		auxNode.setPrevious(toInsert);
-		currentSize++;
+
 	}
 	
 	@Override
@@ -183,10 +185,7 @@ public class DoublyLinkedList<E> implements List<E>  {
 		if (size() == 1) {
 		    head = null;
 		    tail = null;
-        }else{
-			head = head.getNext();
-			head.setPrevious(null);
-		}
+        }else head = head.getNext();
 		currentSize--;
     }
 
@@ -211,10 +210,7 @@ public class DoublyLinkedList<E> implements List<E>  {
         if (size() == 1) {
             head = null;
             tail = null;
-        }else {
-        	tail = tail.getPrevious();
-        	tail.setNext(null);
-        }
+        }else tail = tail.getPrevious();
         currentSize--;
     }
 
@@ -266,7 +262,6 @@ public class DoublyLinkedList<E> implements List<E>  {
 	@Override
 	public boolean remove(E element)
 	{
-
 		DListNode<E> node = this.findNode(element);
 		if ( node == null )
 			return false;
@@ -282,14 +277,22 @@ public class DoublyLinkedList<E> implements List<E>  {
 		}
 	}
 
+	/**
+	 * Find the <code>DListNode</code> with this <code>element</code>
+	 * @param element -
+	 * @return DListNode with this <code>element</code>, otherwise returns null
+	 */
     private DListNode<E> findNode(E element) {
         DListNode<E> auxNode = head;
-        int pos = 0;
-        while (auxNode != null){
-            if(auxNode.getElement().equals(element)) return auxNode;
-            auxNode = auxNode.getNext();
-            pos++;
-        }
+
+        if (auxNode == null)
+        	return null;
+
+        while (auxNode.getNext() != null){
+			if(auxNode.getElement().equals(element)) return auxNode;
+			auxNode = auxNode.getNext();
+		}
+
         return null;
     }
 
@@ -305,23 +308,22 @@ public class DoublyLinkedList<E> implements List<E>  {
      */
     public void append( DoublyLinkedList<E> list )
     {
-    	if(this.isEmpty()){
-    		this.head = list.head;
-		} else {
+    	if (!list.isEmpty()){
+			if(this.isEmpty()){
+				this.head = list.head;
+			} else {
 
-			this.tail.setNext(list.head);
-			list.head.setPrevious(this.tail);
+				this.tail.setNext(list.head);
+				list.head.setPrevious(this.tail);
+			}
+
+			this.tail = list.tail;
+			this.currentSize = size() + list.size();
+
+			list.head = null;
+			list.tail = null;
+			list.currentSize = 0;
 		}
-
-        this.tail = list.tail;
-		this.currentSize = size() + list.size();
-
-		list.head = null;
-		list.tail = null;
-		list.currentSize = 0;
-
     }
-
-
 
 }

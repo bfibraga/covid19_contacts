@@ -4,7 +4,7 @@ import network.Exceptions.*;
 import network.Group.*;
 import network.User.*;
 import network.Message.*;
-import dataStructures.*;
+import network.dataStructures.*;
 
 /**
  * An class that executes all the commands of <code>Main</code>

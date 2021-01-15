@@ -1,7 +1,7 @@
 package network.Group;
 
 import network.User.*;
-import dataStructures.*;
+import network.dataStructures.*;
 import network.Message.*;
 
 /**
@@ -38,7 +38,7 @@ public class GroupClass implements Group {
     public GroupClass(String name, String text) {
         this.name = name;
         this.description = text;
-        participants = new BinarySearchTree<>();
+        participants = new AVLTree<>();
         messages = new SinglyLinkedList<>();
     }
 

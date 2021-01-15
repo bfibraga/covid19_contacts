@@ -1,5 +1,8 @@
 package network.dataStructures;
 
+import network.Exceptions.InvalidPositionException;
+import network.Exceptions.NoElementException;
+
 /**
  * Singly linked list Implementation 
  * @author AED  Team
@@ -140,7 +143,7 @@ public class SinglyLinkedList<E> implements List<E> {
 				previous = previous.getNext(); // Advance through the list until we reach the node that is 1 position away from the actual position
 			}
 			SListNode<E> next = previous.getNext(); // We collect the node linked by the previous node and call it "next"
-			SListNode<E> toInsert = new SListNode<E>(element, next); // We create a node that is linked to "next" with said element
+			SListNode<E> toInsert = new SListNode<>(element, next); // We create a node that is linked to "next" with said element
 			previous.setNext(toInsert); // We change the node's link from pointing towards "next" to the new node.
 			currentSize++; // We have added a new element so we increase the list's size.
 		}
@@ -217,5 +220,16 @@ public class SinglyLinkedList<E> implements List<E> {
 
 		return true;
 
+	}
+
+
+	protected E get(E element) {
+		Iterator<E> it = iterator();
+		E elem;
+		while(it.hasNext()){
+			elem = it.next();
+			if(elem.equals(element)) return elem;
+		}
+		return null;
 	}
 }

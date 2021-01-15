@@ -2,7 +2,7 @@ package network.User;
 
 import network.Group.Group;
 import network.Message.Message;
-import dataStructures.Iterator;
+import network.dataStructures.Iterator;
 
 /**
  * An interface that represents a <code>"Utilizador"</code> of the system.

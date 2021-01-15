@@ -4,7 +4,7 @@ import network.Exceptions.*;
 import network.Group.Group;
 import network.Message.Message;
 import network.User.*;
-import dataStructures.Iterator;
+import network.dataStructures.Iterator;
 //Completar package e imports
 
 public interface ContactNet {
